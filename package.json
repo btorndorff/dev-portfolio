@@ -2,7 +2,7 @@
   "name": "ben-orndorff-dev",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://btorndorff.github.io/dev-portfolio",
+  "homepage": "https://btorndorff.github.io/dev-portfolio/",
   "dependencies": {
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.20.0",
