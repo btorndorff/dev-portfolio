@@ -2,6 +2,7 @@
   "name": "ben-orndorff-dev",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://btorndorff.github.io/dev-portfolio",
   "dependencies": {
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.20.0",
@@ -19,9 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",   
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
