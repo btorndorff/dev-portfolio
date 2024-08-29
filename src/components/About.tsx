@@ -18,7 +18,7 @@ const About = () => {
           alt="me"
           className="rounded-full border-black border-4 object-cover"
         />
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-center justify-center">
           <img
             src="/icons/github.svg"
             alt="github"
@@ -33,20 +33,20 @@ const About = () => {
               handleRedirect("https://www.linkedin.com/in/benjaminorndorff")
             }
           />
+          <img
+            src="/icons/mail.svg"
+            alt="email"
+            className="cursor-pointer"
+            onClick={() => handleRedirect("mailto:btorndorff@gmail.com")}
+          />
         </div>
       </div>
 
       <p className="text-left w-full md:w-2/3 self-center">
-        Our longing isn’t surprising given that the Internet doesn’t look too
-        hopeful these days. Every month there seems to be another obituary for
-        an internet “public square” dismantled by private interventions.
-        Companies are cracking down on the open internet, AI startups are
-        harvesting our data to automate our livelihoods, and the spaces we’ve
-        hung out in for years are kicking us out and changing the rules by the
-        day. The Internet, now, feels like monopolized app stores, devices that
-        slowly die and can’t be repaired, and pages crammed with content
-        perfected for machines rather than people. New platforms promise a
-        wonderful new world to users and, once it has them, slowly die.
+        Hi, I'm Ben, amatuer designer and somewhat profession full stack
+        software engineer. I enjoy building cool things end to end and working
+        on challenges. I am a language learning enthusiast as well as love film
+        photography!
       </p>
     </div>
   );

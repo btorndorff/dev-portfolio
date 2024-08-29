@@ -24,6 +24,9 @@ export default function Photography() {
             return 2;
           }}
           onClick={({ index }) => setIndex(index)}
+          componentsProps={{
+            image: { className: "cursor-pointer" },
+          }}
         />
 
         <div className="my-3" />
@@ -34,6 +37,7 @@ export default function Photography() {
         close={() => setIndex(-1)}
         slides={photos.map((img) => ({ src: img.src, alt: img.alt }))}
         index={index}
+        className="cursor-pointer"
       />
     </div>
   );
