@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-const About = () => {
+const About = ({
+  setSelectedPage,
+}: {
+  setSelectedPage: (page: string) => void;
+}) => {
+  const [hovered, setHovered] = useState(false);
+
   const handleRedirect = (url: string) => {
     window.open(url, "_blank");
   };
@@ -34,20 +40,44 @@ const About = () => {
             }
           />
           <img
-            src="/icons/mail.svg"
+            src={`/icons/mail${hovered ? "-open" : ""}.svg`}
             alt="email"
             className="cursor-pointer"
             onClick={() => handleRedirect("mailto:btorndorff@gmail.com")}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
           />
         </div>
       </div>
 
-      <p className="text-left w-full md:w-2/3 self-center">
-        Hi, I'm Ben, amatuer designer and somewhat profession full stack
-        software engineer. I enjoy building cool things end to end and working
-        on challenges. I am a language learning enthusiast as well as love film
-        photography!
-      </p>
+      <div className="text-left w-full md:w-2/3 self-center">
+        <p>
+          Hi! I'm Ben, a full-stack software engineer based in San Francisco. In
+          my free time, I love working on fun, challenging projects where I can
+          build things from scratch, end-to-end. I'm passionate about language
+          learning—currently studying Vietnamese and Japanese—and am always
+          looking for innovative ways to contribute to the space! I'm always
+          open for a chat, so feel free to reach out wherever you can find me.
+        </p>
+        <br />
+        <p>
+          P.S. Check out some of my{" "}
+          <span
+            className="cursor-pointer underline"
+            onClick={() => setSelectedPage("projects")}
+          >
+            projects
+          </span>{" "}
+          and{" "}
+          <span
+            className="cursor-pointer underline"
+            onClick={() => setSelectedPage("photgraphy")}
+          >
+            film photography
+          </span>{" "}
+          ...
+        </p>
+      </div>
     </div>
   );
 };

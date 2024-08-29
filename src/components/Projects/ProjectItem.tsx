@@ -1,17 +1,17 @@
 import React from "react";
 
-interface ProjectItemProps {
-  title: string;
-  isOpen: boolean;
-  toggleItem: () => void;
-  children: React.ReactNode;
-}
-
-const ProjectItem: React.FC<ProjectItemProps> = ({
+const ProjectItem = ({
   title,
   isOpen,
   toggleItem,
   children,
+  wip,
+}: {
+  title: string;
+  isOpen: boolean;
+  toggleItem: () => void;
+  children: React.ReactNode;
+  wip: boolean;
 }) => {
   return (
     <div className="border-t-4 border-black">
@@ -19,7 +19,15 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         className="flex justify-between items-center text-black p-2 md:p-4 cursor-pointer transition duration-500 ease-in-out"
         onClick={toggleItem}
       >
-        <span className="text-xl md:text-2xl font-semibold">{title}</span>
+        <div className="flex items-center gap-2">
+          {wip && (
+            <span className="bg-black text-white text-xs px-2 py-2 rounded-[25px] flex items-center gap-1">
+              <img src="/icons/hammer.svg" alt="Building" className="w-4 h-4" />
+              In Progress
+            </span>
+          )}
+          <span className="text-xl md:text-2xl font-semibold">{title}</span>
+        </div>
         <span className="text-xl md:text-2xl font-bold">
           {isOpen ? "-" : "+"}
         </span>

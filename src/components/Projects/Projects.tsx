@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ProjectItem from "./ProjectItem.tsx";
 import ProjectContent from "./ProjectContent.tsx";
+import LangCard from "./LangCard.tsx";
 
 interface Project {
   title: string;
   component: React.ReactNode;
+  wip: boolean;
 }
 
 const Projects: React.FC = () => {
@@ -23,7 +25,8 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       title: "Lang Card - AI Generated Flashcards",
-      component: <ProjectContent content="blah blah blah" />,
+      component: <LangCard />,
+      wip: true,
     },
   ];
 
@@ -35,6 +38,7 @@ const Projects: React.FC = () => {
           title={project.title}
           isOpen={openItems.includes(index)}
           toggleItem={() => toggleItem(index)}
+          wip={project.wip}
         >
           {project.component}
         </ProjectItem>
