@@ -14,19 +14,19 @@ const About = () => {
     >
       <div className="flex flex-col items-center gap-3 w-full md:w-1/3">
         <img
-          src="/images/me.jpeg"
+          src="dev-portfolio/images/me.jpeg"
           alt="me"
           className="rounded-full border-black border-4 object-cover"
         />
         <div className="flex gap-3">
           <img
-            src="/icons/github.svg"
+            src="dev-portfolio//icons/github.svg"
             alt="github"
             className="cursor-pointer"
             onClick={() => handleRedirect("https://github.com/btorndorff")}
           />
           <img
-            src="/icons/linkedin.svg"
+            src="dev-portfolio//icons/linkedin.svg"
             alt="linkedin"
             className="cursor-pointer"
             onClick={() =>

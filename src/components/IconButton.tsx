@@ -11,7 +11,9 @@ const IconButton = ({
 }) => {
   const [hovered, setHovered] = useState(false);
 
-  const iconSrc = `/icons/${icon}${hovered || selected ? "-dark" : ""}.svg`;
+  const iconSrc = `dev-portfolio/icons/${icon}${
+    hovered || selected ? "-dark" : ""
+  }.svg`;
 
   return (
     <img
