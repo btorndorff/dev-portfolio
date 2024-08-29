@@ -23,7 +23,7 @@ const ProjectItem = ({
           {wip && (
             <span className="bg-black text-white text-xs px-2 py-2 rounded-[25px] flex items-center gap-1">
               <img src="/icons/hammer.svg" alt="Building" className="w-4 h-4" />
-              In Progress
+              <p className="hidden md:block">In Progress</p>
             </span>
           )}
           <span className="text-xl md:text-2xl font-semibold">{title}</span>
@@ -39,7 +39,7 @@ const ProjectItem = ({
             : "translate-y-4 max-h-0 opacity-0"
         }`}
       >
-        <div className="text-black p-4">{children}</div>
+        <div className="text-black p-2 md:p-4">{children}</div>
       </div>
     </div>
   );

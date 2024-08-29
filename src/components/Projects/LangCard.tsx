@@ -2,7 +2,7 @@ import React from "react";
 
 const LangCard = () => {
   return (
-    <div className="flex flex-col md:flex-row w-full px-4">
+    <div className="flex flex-col md:flex-row w-full md:px-4">
       {/* Left Side - Video */}
       <div className="w-full md:w-1/2 flex flex-col items-center">
         <div className="w-full h-64 bg-gray-200">
@@ -14,7 +14,7 @@ const LangCard = () => {
         </div>
       </div>
 
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-4 font-light">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center pt-1 md:pt-0 md:px-4 font-light text-left md:text-center">
         <div>
           <p>
             LangCard is a personal project I've been working on to help my
