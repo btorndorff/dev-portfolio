@@ -40,7 +40,7 @@ const LangCard = () => {
         </div>
         <div className="mt-2">
           <a
-            href="https://github.com/btorndorff"
+            href="https://github.com/btorndorff/lang-card"
             target="_blank"
             rel="noopener noreferrer"
           >

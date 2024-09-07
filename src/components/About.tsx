@@ -71,7 +71,7 @@ const About = ({
           and{" "}
           <span
             className="cursor-pointer underline"
-            onClick={() => setSelectedPage("photgraphy")}
+            onClick={() => setSelectedPage("photography")}
           >
             film photography
           </span>{" "}
