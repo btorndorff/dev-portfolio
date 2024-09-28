@@ -9,7 +9,7 @@ const LangCard = () => {
           <video
             className="w-full h-full object-cover"
             controls
-            src="https://res.cloudinary.com/dcdfuucla/video/upload/v1724911203/dev-portfolio/rprhwkcpiiayosofbqsr.mov"
+            src="https://res.cloudinary.com/dcdfuucla/video/upload/f_auto:video,q_auto/v1/dev-portfolio/ecpfhjhqpmjzwjsdmlc6"
           />
         </div>
       </div>
@@ -19,9 +19,9 @@ const LangCard = () => {
           <p>
             LangCard is a personal project I've been working on to help my
             language learning + explore OpenAI's tools. It allows users to
-            generate flashcards from audio in the language they are learning.
-            The flashcards can be exported and used in applications like Quizlet
-            or Anki.
+            generate flashcards from audio or text input in the language they
+            are learning. The flashcards can be exported and used in
+            applications like Quizlet or Anki.
           </p>
           <p className="mt-2">
             The process works as follows: <strong>Whisper → GPT → TTS</strong>.
