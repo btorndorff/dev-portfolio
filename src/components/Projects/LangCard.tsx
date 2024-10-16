@@ -9,7 +9,7 @@ const LangCard = () => {
           <video
             className="w-full h-full object-cover"
             controls
-            src="https://res.cloudinary.com/dcdfuucla/video/upload/f_auto:video,q_auto/v1/dev-portfolio/ecpfhjhqpmjzwjsdmlc6"
+            src="https://res.cloudinary.com/dcdfuucla/video/upload/f_auto:video,q_auto/v1/dev-portfolio/gcakh74cpc80xtmarmhc"
           />
         </div>
       </div>
@@ -29,7 +29,7 @@ const LangCard = () => {
           <p className="mt-2">
             Check it out here:{" "}
             <a
-              href="https://lang-card.pages.dev"
+              href="https://langcard.pages.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="underline"
