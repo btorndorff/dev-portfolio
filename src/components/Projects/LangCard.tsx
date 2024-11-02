@@ -3,7 +3,6 @@ import React from "react";
 const LangCard = () => {
   return (
     <div className="flex flex-col md:flex-row w-full md:px-4">
-      {/* Left Side - Video */}
       <div className="w-full md:w-1/2 flex flex-col items-center">
         <div className="w-full h-64 bg-gray-200">
           <video

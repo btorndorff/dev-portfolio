@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ProjectItem from "./ProjectItem.tsx";
-import ProjectContent from "./ProjectContent.tsx";
 import LangCard from "./LangCard.tsx";
-
+import Langoo from "./Langoo.tsx";
 interface Project {
   title: string;
   component: React.ReactNode;
@@ -23,6 +22,11 @@ const Projects: React.FC = () => {
   };
 
   const projects: Project[] = [
+    {
+      title: "Langoo - Personal Language Learning Dashboard",
+      component: <Langoo />,
+      wip: true,
+    },
     {
       title: "Lang Card - AI Generated Flashcards",
       component: <LangCard />,
