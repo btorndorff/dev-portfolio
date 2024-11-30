@@ -16,6 +16,7 @@ const Langoo = () => {
             { name: "React" },
             { name: "TypeScript" },
             { name: "Python Flask" },
+            { name: "AWS" },
             { name: "MongoDB" },
             { name: "OpenAI API" },
             {name: "LiveKit API"}

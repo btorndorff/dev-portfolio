@@ -14,7 +14,7 @@ const About = () => {
           <p>
             SF Full Stack Software Engineer committed to creating beautiful and impactful digital solutions.
             Currently at <a href="https://www.cambly.com/english?lang=en" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">Cambly</a>, 
-            where I work on creating features to revolutionize english language learning.
+            where I work on creating tools to revolutionize English language learning.
           </p>
         </Section>
 
