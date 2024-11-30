@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import About from './pages/About';
 import Projects from './pages/Projects';
@@ -7,7 +7,7 @@ import { MobileFooter, DesktopFooter } from './components/Footer';
 import { ThemeProvider } from './context/ThemeContext';
 import Langoo from './pages/projects/Langoo';
 import LangCard from './pages/projects/LangCard';
-import Todo from './pages/projects/Todo';
+import Todo from './pages/projects/ToDo';
 
 function App() {
   return (
