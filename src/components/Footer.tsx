@@ -2,7 +2,7 @@ import { Github, Linkedin, Mail, MailOpen } from "lucide-react";
 
 export const MobileFooter = () => {
   return (
-    <footer className="w-full flex justify-between items-center p-4 md:hidden bg-gray-50 dark:bg-gray-900">
+    <footer className="fixed bottom-0 w-full flex justify-between items-center p-4 md:hidden bg-gray-50 dark:bg-gray-900">
       <a
         href="mailto:btorndorff@gmail.com"
         className="text-sm font-mono text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
