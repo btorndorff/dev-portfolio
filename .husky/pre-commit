@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+node scripts/update-footer-date.js
+git add src/components/Footer.tsx 
