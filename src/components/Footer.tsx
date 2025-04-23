@@ -55,7 +55,7 @@ export const DesktopFooter = () => {
         </div>
       </div>
       <div className="fixed bottom-8 left-8 text-sm font-mono text-gray-500 dark:text-gray-400 [writing-mode:vertical-lr] transform rotate-180">
-        UPDATED 01/11/25
+        UPDATED 04/22/25
       </div>
     </footer>
   );
