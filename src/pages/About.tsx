@@ -28,7 +28,7 @@ const About = () => {
           <p>
             In my spare time, I'm working on side projects like{" "}
             <Link
-              to="/projects/langoo"
+              to="/projects/langoo-v2"
               className="text-blue-600 dark:text-blue-400 hover:underline"
             >
               Langoo
