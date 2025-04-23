@@ -47,6 +47,12 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <ProjectCard
+            title="Langoo V2"
+            description="A personalized Language Learning Tutor that remebers your language learning journey and adapts to your needs."
+            link="/projects/langoo-v2"
+          />
+
+          <ProjectCard
             title="Langoo"
             description="A personal language learning dashboard with the goal of becoming a one-stop-shop for all your language learning needs."
             link="/projects/langoo"

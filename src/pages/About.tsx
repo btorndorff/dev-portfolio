@@ -18,7 +18,7 @@ const About = () => {
               target="_blank"
               className="text-blue-600 dark:text-blue-400 hover:underline"
             >
-              Cambly
+              Replo
             </a>
             , where I work on creating tools to revolutionize e-commerce.
           </p>

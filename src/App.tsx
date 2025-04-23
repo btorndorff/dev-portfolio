@@ -8,6 +8,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Langoo from "./pages/projects/Langoo";
 import LangCard from "./pages/projects/LangCard";
 import Todo from "./pages/projects/ToDo";
+import LangooV2 from "./pages/projects/LangooV2";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/projects/langoo" element={<Langoo />} />
               <Route path="/projects/langcard" element={<LangCard />} />
               <Route path="/projects/todo" element={<Todo />} />
+              <Route path="/projects/langoo-v2" element={<LangooV2 />} />
             </Routes>
           </div>
           <MobileFooter />
