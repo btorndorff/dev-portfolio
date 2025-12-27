@@ -1,61 +1,108 @@
-import Section from "../components/Section";
 import { Link } from "react-router-dom";
+import { useCursorTooltip } from "../context/CursorTooltipContext";
+import {
+  HandPointingIcon,
+  ArrowUpRightIcon,
+  CameraIcon,
+} from "@phosphor-icons/react";
+
+const Section = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => {
+  return (
+    <div className="space-y-3">
+      <div className="text-sm font-mono">{title}</div>
+      <div className="text-secondary text-lg leading-relaxed">{children}</div>
+    </div>
+  );
+};
 
 const About = () => {
-  return (
-    <main className="max-w-3xl mx-auto px-6 h-[calc(100vh-64px)] mt-16 relative">
-      <div className="h-full overflow-y-auto no-scrollbar">
-        <h1 className="text-5xl font-bold mb-20 dark:text-white pt-8">
-          Hi, I'm Ben Orndorff!
-        </h1>
+  const { setTooltip } = useCursorTooltip();
 
-        <Section title="WORK" percentage="50%">
+  return (
+    <main className="max-w-3xl mx-auto h-full relative px-6">
+      <div className="h-full overflow-y-auto no-scrollbar space-y-16 pt-24">
+        <div className="flex gap-6 items-center w-full">
+          <img
+            src="/images/pfp_lg.jpeg"
+            alt="Me"
+            className="size-32 shrink-0 object-cover"
+            onMouseEnter={() => setTooltip("me & ghib")}
+            onMouseLeave={() => setTooltip(null)}
+          />
+          <h1 className="text-3xl md:text-5xl font-semibold">
+            Hi there, I'm{" "}
+            <span
+              onMouseEnter={() => setTooltip("me")}
+              onMouseLeave={() => setTooltip(null)}
+            >
+              Ben!
+            </span>
+          </h1>
+        </div>
+
+        <Section title="- WORK -">
           <p>
-            SF Full Stack Software Engineer committed to creating beautiful and
-            impactful digital solutions. Currently at{" "}
+            Full stack engineer in SF passionate about crafting beautiful user
+            experiences. Currently at{" "}
             <a
               href="https://www.replo.app/"
               target="_blank"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-primary hover:underline"
+              onMouseEnter={() =>
+                setTooltip(<ArrowUpRightIcon size={16} weight="bold" />)
+              }
+              onMouseLeave={() => setTooltip(null)}
             >
               Replo
             </a>
-            , where I work on creating tools to revolutionize e-commerce.
+            , building an AI native ecommerce platform. Before that, I was at{" "}
+            <a
+              href="https://www.cambly.com/"
+              target="_blank"
+              className="text-primary hover:underline"
+              onMouseEnter={() =>
+                setTooltip(<ArrowUpRightIcon size={16} weight="bold" />)
+              }
+              onMouseLeave={() => setTooltip(null)}
+            >
+              Cambly
+            </a>{" "}
+            helping people learn English online.
           </p>
         </Section>
 
-        <Section title="SIDE" percentage="30%">
+        <Section title="- LIFE -">
           <p>
-            In my spare time, I'm working on side projects like{" "}
+            When I'm not working, I'm building tools like{" "}
             <Link
-              to="/projects/langoo-v2"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              to="/projects/noi"
+              className="text-primary hover:underline"
+              onMouseEnter={() =>
+                setTooltip(<HandPointingIcon size={16} weight="bold" />)
+              }
+              onMouseLeave={() => setTooltip(null)}
             >
-              Langoo
-            </Link>
-            , a personal language learning dashboard, and{" "}
-            <Link
-              to="/projects/langcard"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              LangCard
-            </Link>
-            , generative language learning anki flashcards, to help people learn
-            languages.
-          </p>
-        </Section>
-
-        <Section title="LIFE" percentage="20%">
-          <p>
-            When I'm not deep in code, I'm learning Vietnamese and Japanese or
-            out shooting{" "}
+              Noi
+            </Link>{" "}
+            to make language learning easier for everyone. Also learning
+            Vietnamese and Japanese, and shooting{" "}
             <Link
               to="/photos"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-primary hover:underline"
+              onMouseEnter={() =>
+                setTooltip(<CameraIcon size={16} weight="bold" />)
+              }
+              onMouseLeave={() => setTooltip(null)}
             >
               film photos
-            </Link>{" "}
-            on my Canon F-1.
+            </Link>
+            .
           </p>
         </Section>
       </div>

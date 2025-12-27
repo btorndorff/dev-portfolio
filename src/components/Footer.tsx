@@ -1,62 +1,73 @@
-import { Github, Linkedin, Mail, MailOpen } from "lucide-react";
+import { useCursorTooltip } from "../context/CursorTooltipContext";
+import {
+  ArrowUpRightIcon,
+  PaperPlaneTiltIcon,
+  XLogoIcon,
+  LinkedinLogoIcon,
+  GithubLogoIcon,
+  MailboxIcon,
+} from "@phosphor-icons/react";
+import { ReactNode } from "react";
 
-export const MobileFooter = () => {
-  return (
-    <footer className="fixed bottom-0 w-full flex justify-between items-center p-4 md:hidden bg-gray-50 dark:bg-gray-900">
-      <a
-        href="mailto:btorndorff@gmail.com"
-        className="text-sm font-mono text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-      >
-        → BTORNDORFF@GMAIL.COM
-      </a>
-
-      <div className="flex gap-6">
-        <a
-          href="https://github.com/btorndorff"
-          className="hover:text-gray-600 dark:text-white dark:hover:text-gray-300 transition-colors"
-        >
-          <Github className="w-5 h-5" />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/benjaminorndorff/"
-          className="hover:text-gray-600 dark:text-white dark:hover:text-gray-300 transition-colors"
-        >
-          <Linkedin className="w-5 h-5" />
-        </a>
+const socialLinks: {
+  href: string;
+  icon: ReactNode;
+  tooltip: ReactNode;
+}[] = [
+  {
+    href: "mailto:btorndorff@gmail.com",
+    icon: <MailboxIcon size={20} weight="bold" />,
+    tooltip: (
+      <div className="flex items-center gap-2">
+        <PaperPlaneTiltIcon size={16} weight="bold" /> btorndorff@gmail.com
       </div>
-    </footer>
-  );
-};
+    ),
+  },
+  {
+    href: "https://x.com/borffstuff",
+    icon: <XLogoIcon size={20} weight="bold" />,
+    tooltip: <ArrowUpRightIcon size={16} weight="bold" />,
+  },
+  {
+    href: "https://github.com/btorndorff",
+    icon: <GithubLogoIcon size={20} weight="bold" />,
+    tooltip: <ArrowUpRightIcon size={16} weight="bold" />,
+  },
+  {
+    href: "https://www.linkedin.com/in/benjaminorndorff/",
+    icon: <LinkedinLogoIcon size={20} weight="bold" />,
+    tooltip: <ArrowUpRightIcon size={16} weight="bold" />,
+  },
+];
 
-export const DesktopFooter = () => {
+export default function Footer() {
+  const { setTooltip } = useCursorTooltip();
   return (
-    <footer className="hidden md:block">
-      <div className="fixed bottom-8 right-8">
-        <div className="flex flex-col gap-6">
-          <a
-            href="mailto:btorndorff@gmail.com"
-            className="hover:text-gray-600 dark:text-white dark:hover:text-gray-300 transition-colors group"
-          >
-            <Mail className="w-5 h-5 block group-hover:hidden" />
-            <MailOpen className="w-5 h-5 hidden group-hover:block" />
-          </a>
-          <a
-            href="https://github.com/btorndorff"
-            className="hover:text-gray-600 dark:text-white dark:hover:text-gray-300 transition-colors"
-          >
-            <Github className="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/benjaminorndorff/"
-            className="hover:text-gray-600 dark:text-white dark:hover:text-gray-300 transition-colors"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
+    <footer className="absolute bottom-0 w-full flex justify-center items-center max-w-3xl mx-auto px-6">
+      <div className="flex justify-between items-center gap-2 w-full bg-gradient-to-t from-background-bottom via-background-bottom/85 to-transparent py-3">
+        <span className="text-sm font-mono text-secondary">
+          → UPDATED 04/22/25
+        </span>
+
+        <div className="flex gap-3">
+          {socialLinks.map((link) => {
+            const Icon = link.icon;
+
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className="hover:text-secondary transition-colors group"
+                onMouseEnter={() => setTooltip(link.tooltip)}
+                onMouseLeave={() => setTooltip(null)}
+                target="_blank"
+              >
+                {Icon}
+              </a>
+            );
+          })}
         </div>
       </div>
-      <div className="fixed bottom-8 left-8 text-sm font-mono text-gray-500 dark:text-gray-400 [writing-mode:vertical-lr] transform rotate-180">
-        UPDATED 04/22/25
-      </div>
     </footer>
   );
-};
+}
