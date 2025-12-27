@@ -1,7 +1,6 @@
 {
   "name": "vite-react-typescript-starter",
   "private": true,
-  "homepage": "https://benorndorff.me/",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -9,8 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "bun run build"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
