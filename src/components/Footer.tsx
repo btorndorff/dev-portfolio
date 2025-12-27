@@ -46,7 +46,7 @@ export default function Footer() {
     <footer className="absolute bottom-0 w-full flex justify-center items-center max-w-3xl mx-auto px-6">
       <div className="flex justify-between items-center gap-2 w-full bg-gradient-to-t from-background-bottom via-background-bottom/85 to-transparent py-3">
         <span className="text-sm font-mono text-secondary">
-          → UPDATED 04/22/25
+          → UPDATED 12/27/25
         </span>
 
         <div className="flex gap-3">

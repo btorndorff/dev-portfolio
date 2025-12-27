@@ -17,7 +17,7 @@ const Photos = () => {
   );
 
   return (
-    <main className="max-w-3xl mx-auto px-6 h-[100vh] relative">
+    <main className="px-6 h-screen relative">
       <div className="h-full overflow-y-auto no-scrollbar pt-24 pb-16 space-y-8">
         <span>shot on film</span>
 

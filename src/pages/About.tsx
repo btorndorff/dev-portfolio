@@ -25,8 +25,8 @@ const About = () => {
   const { setTooltip } = useCursorTooltip();
 
   return (
-    <main className="max-w-3xl mx-auto h-full relative px-6">
-      <div className="h-full overflow-y-auto no-scrollbar space-y-16 pt-24">
+    <main className="px-6 h-screen relative">
+      <div className="h-full overflow-y-auto no-scrollbar space-y-16 pt-24 pb-16">
         <div className="flex gap-6 items-center w-full">
           <img
             src="/images/pfp_lg.jpeg"

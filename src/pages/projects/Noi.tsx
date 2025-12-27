@@ -23,7 +23,7 @@ const Noi = () => {
 
         <a href="https://noi.to" target="_blank" rel="noopener noreferrer">
           <video
-            src="https://pub-1164e894433f497aa13320e6d1a940c9.r2.dev/noi_demo.mov"
+            src="https://assets.benorndorff.me/noi_demo.mov"
             autoPlay
             loop
             muted
