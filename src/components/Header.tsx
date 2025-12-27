@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "@/context/ThemeContext";
 import { twMerge } from "tailwind-merge";
 import { SunIcon, MoonIcon } from "@phosphor-icons/react";
 

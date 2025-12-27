@@ -3,8 +3,8 @@ import { MasonryPhotoAlbum } from "react-photo-album";
 import "react-photo-album/masonry.css";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import photos from "../data/photos";
-import { useCursorTooltip } from "../context/CursorTooltipContext";
+import photos from "@/data/photos";
+import { useCursorTooltip } from "@/context/CursorTooltipContext";
 import { MagnifyingGlassPlusIcon } from "@phosphor-icons/react";
 
 const Photos = () => {

@@ -1,4 +1,4 @@
-import ProjectTemplate from '../../components/ProjectTemplate';
+import ProjectTemplate from "@/components/ProjectTemplate";
 
 const LangCard = () => {
     const projectData = {

@@ -1,4 +1,4 @@
-import { useCursorTooltip } from "../context/CursorTooltipContext";
+import { useCursorTooltip } from "@/context/CursorTooltipContext";
 import {
   ArrowUpRightIcon,
   PaperPlaneTiltIcon,

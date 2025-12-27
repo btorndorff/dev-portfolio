@@ -1,4 +1,4 @@
-import ProjectTemplate from "../../components/ProjectTemplate";
+import ProjectTemplate from "@/components/ProjectTemplate";
 
 const LangooV2 = () => {
   const projectData = {

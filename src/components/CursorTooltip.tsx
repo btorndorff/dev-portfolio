@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCursorTooltip } from "../context/CursorTooltipContext";
+import { useCursorTooltip } from "@/context/CursorTooltipContext";
 
 const CursorTooltip = () => {
   const { tooltip } = useCursorTooltip();
@@ -16,7 +16,7 @@ const CursorTooltip = () => {
 
   return (
     <span
-      className="hidden md:block fixed bg-primary text-white text-sm px-2 py-1 rounded-full pointer-events-none z-50 transition-opacity duration-300"
+      className="hidden md:block fixed bg-primary text-white text-sm px-2 py-1 rounded-full pointer-events-none z-50 transition-opacity duration-300 z-100"
       style={{
         left: position.x + 12,
         top: position.y - 24,

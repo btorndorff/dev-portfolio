@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useCursorTooltip } from "../context/CursorTooltipContext";
+import { useCursorTooltip } from "@/context/CursorTooltipContext";
 import {
   HandPointingIcon,
   ArrowUpRightIcon,

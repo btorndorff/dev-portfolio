@@ -71,14 +71,14 @@ const ProjectTemplate = ({
             <h2 className="text-2xl font-bold mb-4 dark:text-white">
               Overview
             </h2>
-            <p className="text-gray-600 dark:text-gray-300">{overview}</p>
+            <p className="text-secondary">{overview}</p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold mb-4 dark:text-white">
               Key Features
             </h2>
-            <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
+            <ul className="list-disc list-inside text-secondary space-y-2">
               {features.map((feature, index) => (
                 <li key={index}>{feature}</li>
               ))}

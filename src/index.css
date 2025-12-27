@@ -1,21 +1,33 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
-  --color-primary: rgba(222, 69, 53, 1);
-  --color-secondary: rgba(75, 85, 99, 1);
-  --color-background: rgba(255, 255, 255, 1);
-  --color-background-top: rgba(255, 255, 255, 1);
-  --color-background-bottom: rgba(255, 255, 255, 1);
+  --raw-default: rgba(0, 0, 0, 1);
+  --raw-primary: rgba(222, 69, 53, 1);
+  --raw-secondary: rgba(75, 85, 99, 1);
+  --raw-background: rgba(255, 255, 255, 1);
+  --raw-background-top: rgba(255, 255, 255, 1);
+  --raw-background-bottom: rgba(255, 255, 255, 1);
 }
 
 .dark {
-  --color-primary: #2067ff;
-  --color-secondary: rgba(156, 163, 175, 1);
-  --color-background-top: #000312;
-  --color-background-bottom: #070d2b;
+  --raw-default: rgba(255, 255, 255, 1);
+  --raw-primary: #2067ff;
+  --raw-secondary: rgba(156, 163, 175, 1);
+  --raw-background-top: #000312;
+  --raw-background-bottom: #070d2b;
+}
+
+@theme {
+  --color-primary: var(--raw-primary);
+  --color-secondary: var(--raw-secondary);
+  --color-background: var(--raw-background);
+  --color-background-top: var(--raw-background-top);
+  --color-background-bottom: var(--raw-background-bottom);
+}
+
+@utility text-default {
+  color: var(--raw-default);
 }
 
 body {
@@ -25,15 +37,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   overflow: hidden;
-  cursor: url("/cursor.svg") 6 6, auto;
-  background: var(--color-background);
+  cursor: var(--cursor-default);
+  background: var(--raw-background);
 }
 
 .dark body {
   background: linear-gradient(
     to bottom,
-    var(--color-background-top) 50%,
-    var(--color-background-bottom) 100%
+    var(--raw-background-top) 50%,
+    var(--raw-background-bottom) 100%
   );
 }
 
@@ -45,22 +57,20 @@ input[type="button"],
 label[for],
 select,
 summary,
+img,
 [onclick],
 .cursor-pointer {
-  cursor: url("/cursor-pointer.svg") 6 6, pointer;
+  cursor: var(--cursor-pointer);
 }
 
 ::selection {
   @apply bg-gray-200;
 }
 
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

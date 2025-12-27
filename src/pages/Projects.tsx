@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
-import { useCursorTooltip } from "../context/CursorTooltipContext";
+import { useCursorTooltip } from "@/context/CursorTooltipContext";
 
 interface ProjectCardProps {
   title: string;
