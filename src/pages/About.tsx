@@ -87,6 +87,7 @@ const About = () => {
                 setTooltip(<HandPointingIcon size={16} weight="bold" />)
               }
               onMouseLeave={() => setTooltip(null)}
+              onClick={() => setTooltip(null)}
             >
               Noi
             </Link>{" "}
@@ -99,6 +100,7 @@ const About = () => {
                 setTooltip(<CameraIcon size={16} weight="bold" />)
               }
               onMouseLeave={() => setTooltip(null)}
+              onClick={() => setTooltip(null)}
             >
               film photos
             </Link>

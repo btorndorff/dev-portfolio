@@ -19,6 +19,7 @@ const ProjectCard = ({ title, link, description, date }: ProjectCardProps) => {
         setTooltip(<ArrowRightIcon size={16} weight="bold" />)
       }
       onMouseLeave={() => setTooltip(null)}
+      onClick={() => setTooltip(null)}
     >
       <div className="h-full flex flex-col gap-3">
         <h2 className="text-lg font-bold">{title}</h2>
