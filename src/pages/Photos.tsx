@@ -17,41 +17,39 @@ const Photos = () => {
   );
 
   return (
-    <main className="px-6 h-screen relative">
-      <div className="h-full overflow-y-auto no-scrollbar pt-24 pb-16 space-y-8">
-        <span>shot on film</span>
+    <div className="space-y-8">
+      <span>shot on film</span>
 
-        <MasonryPhotoAlbum
-          photos={shuffledPhotos}
-          columns={(containerWidth) => {
-            if (containerWidth < 480) return 1;
-            return 2;
-          }}
-          onClick={({ index }) => setIndex(index)}
-          spacing={8}
-          componentsProps={{
-            image: {
-              onMouseEnter: () =>
-                setTooltip(<MagnifyingGlassPlusIcon size={16} weight="bold" />),
-              onMouseLeave: () => setTooltip(null),
-            },
-          }}
-        />
+      <MasonryPhotoAlbum
+        photos={shuffledPhotos}
+        columns={(containerWidth) => {
+          if (containerWidth < 480) return 1;
+          return 2;
+        }}
+        onClick={({ index }) => setIndex(index)}
+        spacing={12}
+        componentsProps={{
+          image: {
+            onMouseEnter: () =>
+              setTooltip(<MagnifyingGlassPlusIcon size={16} weight="bold" />),
+            onMouseLeave: () => setTooltip(null),
+          },
+        }}
+      />
 
-        <Lightbox
-          open={index >= 0}
-          close={() => setIndex(-1)}
-          slides={shuffledPhotos.map((photo) => ({
-            src: photo.src,
-            alt: photo.alt,
-          }))}
-          index={index}
-          styles={{
-            container: { backgroundColor: "rgba(0, 0, 0, .9)" },
-          }}
-        />
-      </div>
-    </main>
+      <Lightbox
+        open={index >= 0}
+        close={() => setIndex(-1)}
+        slides={shuffledPhotos.map((photo) => ({
+          src: photo.src,
+          alt: photo.alt,
+        }))}
+        index={index}
+        styles={{
+          container: { backgroundColor: "rgba(0, 0, 0, .9)" },
+        }}
+      />
+    </div>
   );
 };
 

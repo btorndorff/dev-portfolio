@@ -28,7 +28,6 @@ function AnimatedRoutes() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.1 }}
-        className="flex-1"
       >
         <Routes location={location}>
           <Route path="/" element={<About />} />
@@ -49,10 +48,14 @@ function App() {
       <ThemeProvider>
         <CursorTooltipProvider>
           <CursorTooltip />
-          <div className="text-default font-mono min-h-screen flex flex-col max-w-3xl mx-auto h-full">
+          <div className="text-default font-mono h-screen flex flex-col max-w-3xl mx-auto relative overflow-hidden">
             <Header />
-            <AnimatedRoutes />
-            <Footer />
+            <div className="flex flex-col justify-between flex-1 h-full gap-16 overflow-y-auto no-scrollbar">
+              <main className="px-6 pt-24 md:pb-16">
+                <AnimatedRoutes />
+              </main>
+              <Footer />
+            </div>
           </div>
         </CursorTooltipProvider>
       </ThemeProvider>

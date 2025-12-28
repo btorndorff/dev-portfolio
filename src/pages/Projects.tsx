@@ -60,24 +60,22 @@ const projectCards: ProjectCardProps[] = [
 
 const Projects = () => {
   return (
-    <main className="px-6 h-screen overflow-y-auto no-scrollbar">
-      <div className="flex flex-col gap-3 pt-24 pb-16">
-        {projectCards.map((project, index) => (
-          <>
-            <ProjectCard
-              key={project.link}
-              title={project.title}
-              description={project.description}
-              link={project.link}
-              date={project.date}
-            />
-            {index < projectCards.length - 1 && (
-              <div className="bg-gray-400/20 h-[1px] w-full" />
-            )}
-          </>
-        ))}
-      </div>
-    </main>
+    <div className="flex flex-col gap-3">
+      {projectCards.map((project, index) => (
+        <>
+          <ProjectCard
+            key={project.link}
+            title={project.title}
+            description={project.description}
+            link={project.link}
+            date={project.date}
+          />
+          {index < projectCards.length - 1 && (
+            <div className="bg-gray-400/20 h-[1px] w-full" />
+          )}
+        </>
+      ))}
+    </div>
   );
 };
 

@@ -42,10 +42,11 @@ const socialLinks: {
 
 export default function Footer() {
   const { setTooltip } = useCursorTooltip();
+
   return (
-    <footer className="absolute bottom-0 w-full flex justify-center items-center max-w-3xl mx-auto px-6">
-      <div className="flex justify-between items-center gap-2 w-full bg-gradient-to-t from-background-bottom via-background-bottom/85 to-transparent py-3">
-        <span className="text-sm font-mono text-secondary">
+    <footer className="md:absolute md:bottom-0 w-full flex justify-center items-center pb-32 md:pb-0">
+      <div className="flex justify-center md:justify-between items-center gap-2 w-full md:bg-gradient-to-t from-background-bottom via-background-bottom/85 to-transparent py-3 px-6">
+        <span className="hidden md:block text-sm font-mono text-secondary">
           → UPDATED 12/27/25
         </span>
 
