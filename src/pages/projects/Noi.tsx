@@ -30,7 +30,7 @@ const Noi = () => {
           playsInline
         />
       </a>
-      <p className="">
+      <p className="text-sm">
         Back in September I decided to restart my vietnamese language learning
         after having stopped earlier in the year and started working with a
         tutor twice a week on my Vietnamese. Very quickly I realized even though
