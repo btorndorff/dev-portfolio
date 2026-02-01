@@ -21,7 +21,7 @@ const ProjectPage = () => {
 
   return (
     <MDXProvider components={mdxComponents}>
-      <Article title={frontmatter.title} link={frontmatter.link}>
+      <Article title={frontmatter.title} date={frontmatter.date} link={frontmatter.link}>
         <Component />
       </Article>
     </MDXProvider>
