@@ -32,14 +32,7 @@ const ProjectTemplate = ({
 }: ProjectTemplateProps) => {
   return (
     <div className="flex flex-col gap-3">
-      <Link
-        to="/projects"
-        className="inline-flex items-center text-primary mb-6 hover:underline"
-      >
-        ← Back to Projects
-      </Link>
-
-      <h1 className="text-5xl font-bold mb-8 dark:text-white">{title}</h1>
+      <h1 className="text-5xl font-bold mb-8 text-black">{title}</h1>
 
       {video && (
         <div className="mb-12">

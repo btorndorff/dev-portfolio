@@ -27,6 +27,13 @@ const About = () => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
+        <img
+          src="/images/pfp_lg.jpeg"
+          alt="Me"
+          className="size-32 shrink-0 object-cover"
+          onMouseEnter={() => setTooltip("me & ghib")}
+          onMouseLeave={() => setTooltip(null)}
+        />
         <h1 className="text-3xl font-bold text-black">
           Hi there, I'm{" "}
           <span
