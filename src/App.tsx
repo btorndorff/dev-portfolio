@@ -14,20 +14,20 @@ import { AnimatePresence, motion } from "motion/react";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import Paper from "@/components/Paper";
 import Header from "@/components/Header";
-import PhotosLayout from "@/components/PhotosLayout";
 import { playPaperSlip, playPaperClick } from "@/lib/sounds";
 import Photos from "@/pages/Photos";
 import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
 import { cn } from "./lib/utils";
 
-function AnimatedPaper() {
+function AppContent() {
   const location = useLocation();
+  const isDesktopPhotosRoute = isDesktopPhotosPage();
 
   return (
     <div
       className={cn(
         "relative z-10 min-h-screen flex flex-col items-center pt-[15vh] overflow-hidden",
-        isDesktopPhotosPage() && "justify-end pointer-events-none",
+        isDesktopPhotosRoute && "justify-end pointer-events-none",
       )}
     >
       <AnimatePresence mode="wait">
@@ -35,7 +35,7 @@ function AnimatedPaper() {
           key={location.pathname}
           initial={{ y: "100vh" }}
           animate={{ y: 0 }}
-          exit={{ y: "100vh" }}
+          exit={isDesktopPhotosRoute ? {} : { y: "100vh" }}
           transition={{
             type: "spring",
             stiffness: 300,
@@ -55,7 +55,7 @@ function AnimatedPaper() {
         >
           <Paper
             className={cn(
-              isDesktopPhotosPage() &&
+              isDesktopPhotosRoute &&
                 "!min-h-0 !h-fit after:!h-screen after:bottom-0 pointer-events-auto",
             )}
           >
@@ -67,24 +67,13 @@ function AnimatedPaper() {
                 <Route path="/projects/:slug" element={<ProjectPage />} />
                 <Route path="/photos" element={<Photos />} />
               </Routes>
-              {!isDesktopPhotosPage() && <Footer />}
+              {!isDesktopPhotosRoute && <Footer />}
             </div>
           </Paper>
         </motion.div>
       </AnimatePresence>
     </div>
   );
-}
-
-function AppContent() {
-  const location = useLocation();
-  const isPhotosPage = location.pathname === "/photos";
-
-  // if (isPhotosPage) {
-  //   return <PhotosLayout />;
-  // }
-
-  return <AnimatedPaper />;
 }
 
 function App() {

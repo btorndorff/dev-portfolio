@@ -44,7 +44,9 @@ export default function Header() {
     return (
       <div className="flex items-center w-full justify-between">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() =>
+            window.history.length > 1 ? navigate(-1) : navigate("/")
+          }
           className="flex items-center gap-2 text-black hover:text-primary transition-colors duration-300 z-10"
         >
           <ArrowLeftIcon size={20} weight="bold" />
