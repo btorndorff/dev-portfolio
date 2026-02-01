@@ -17,7 +17,8 @@ import { AnimatePresence, motion } from "motion/react";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import Paper from "@/components/Paper";
 import Header from "@/components/Header";
-import { playPaperSlip, playPaperClick } from "@/lib/sounds";
+import { playPaperSlip, playPaperClick, unlockAudio } from "@/lib/sounds";
+import { useEffect } from "react";
 
 function AnimatedPaper() {
   const location = useLocation();
@@ -66,6 +67,20 @@ function AnimatedPaper() {
 }
 
 function App() {
+  useEffect(() => {
+    const handleInteraction = () => {
+      unlockAudio();
+      window.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("click", handleInteraction);
+    };
+    window.addEventListener("touchstart", handleInteraction);
+    window.addEventListener("click", handleInteraction);
+    return () => {
+      window.removeEventListener("touchstart", handleInteraction);
+      window.removeEventListener("click", handleInteraction);
+    };
+  }, []);
+
   return (
     <Router>
       <CursorTooltipProvider>
