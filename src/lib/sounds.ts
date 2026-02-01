@@ -42,7 +42,7 @@ export function playPaperSlip(): void {
 
   // Gain envelope
   const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0.5, t);
+  gain.gain.setValueAtTime(0.45, t);
   gain.gain.exponentialRampToValueAtTime(0.001, t + duration);
 
   source.connect(filter);
@@ -92,7 +92,7 @@ export function playPaperClick(): void {
 
   // Gain envelope
   const gain = ctx.createGain();
-  gain.gain.setValueAtTime(0.75, t);
+  gain.gain.setValueAtTime(0.6, t);
   gain.gain.exponentialRampToValueAtTime(0.001, t + duration);
 
   source.connect(filter);
