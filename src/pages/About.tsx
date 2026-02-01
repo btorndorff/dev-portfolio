@@ -15,8 +15,8 @@ const Section = ({
 }) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="text-lg font-mono text-black">{title}</div>
-      <div className="text-gray-600 text-lg leading-relaxed">{children}</div>
+      <div className="text-base font-mono text-black">{title}</div>
+      <div className="text-gray-600 leading-relaxed text">{children}</div>
     </div>
   );
 };
@@ -27,7 +27,7 @@ const About = () => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
-        <h1 className="text-5xl font-bold text-black">
+        <h1 className="text-3xl font-bold text-black">
           Hi there, I'm{" "}
           <span
             onMouseEnter={() => setTooltip("me")}
