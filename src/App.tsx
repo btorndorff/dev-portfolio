@@ -7,12 +7,10 @@ import {
 import About from "@/pages/About";
 import Projects from "@/pages/Projects";
 import Photos from "@/pages/Photos";
+import ProjectPage from "@/pages/ProjectPage";
 import { CursorTooltipProvider } from "@/context/CursorTooltipContext";
 import CursorTooltip from "@/components/CursorTooltip";
-import LangCard from "@/pages/projects/LangCard";
-import LangooV2 from "@/pages/projects/LangooV2";
 import Footer from "@/components/Footer";
-import Noi from "@/pages/projects/Noi";
 import { AnimatePresence, motion } from "motion/react";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import Paper from "@/components/Paper";
@@ -53,9 +51,7 @@ function AnimatedPaper() {
               <Route path="/" element={<About />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/photos" element={<Photos />} />
-              <Route path="/projects/langcard" element={<LangCard />} />
-              <Route path="/projects/langoo-v2" element={<LangooV2 />} />
-              <Route path="/projects/noi" element={<Noi />} />
+              <Route path="/projects/:slug" element={<ProjectPage />} />
             </Routes>
             <Footer />
           </div>

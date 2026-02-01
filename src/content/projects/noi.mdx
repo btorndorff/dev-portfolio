@@ -1,0 +1,28 @@
+export const frontmatter = {
+  title: "Noi",
+  slug: "noi",
+  description: "Language learning video logs with feedback",
+  date: "2025-12-27",
+  link: "https://noi.to",
+};
+
+import { NoiLogo } from '@/components/NoiLogo';
+import { Video } from '@/components/MDXComponents';
+
+<Video src="https://assets.benorndorff.me/noi_demo.mov" href="https://noi.to" />
+
+Back in September I restarted my Vietnamese Language Learning goal with one goal: *BE ABLE TO SPEAK*. In previous attempts although I learned a great deal my speaking was still constricted by poor pronunciation, slow speed, and a lack of vocab which effectively made me incoherent to any Vietnamese speaker. I started having lessons with my Vietnamese tutor twice a week but even then progress was still slow. I had to spend at least 15 minutes of each lesson warming up and repracticing everything from the last lesson before I could actually move on to new material. This is how Noi was born, from the need to practice speaking constantly and get real feedback on it. Noi is a language learning diary platform that allows users to do just that.
+
+## How Noi Works
+
+Noi is a language learning diary platform that allows users to record videos of themselves speaking their learning language and get feedback on them all in one place. The feedback is generated based on the transcript of the video and provides the user with some basic suggestions on how to fix grammar or make it sound more natural. In the future I plan to add more advanced feedback features like actual pronunciation feedback and even conversational/situational roleplay entries.
+
+Noi is fully fleshed out with proper auth and a frontend to backend pipeline to record, transcribe, and provide feedback on the videos. I heavily leaned into Cloudflare for this project with the backend on a Cloudflare Worker connected to a D1 database and R2 bucket as well as the frontend on Cloudflare Pages. Other than that it's been fun to work with Tanstack, Hono, and Drizzle frameworks in this project getting to find out why everyone loves them so much.
+
+## Flexing some design muscles
+
+<div className="w-full h-48 flex items-center justify-center not-prose">
+  <NoiLogo width={100} height={100} />
+</div>
+
+Aside from the language learning features, I had a blast designing Noi's UX/UI and brand from scratch. I had originally named this project "Mantra" for the idea of the ritual and constant practice required for language learning. However, it never felt like the right name so after a few weeks the name "Noi" or "speak" in Vietnamese struck me and I rehauled the look around that. The hover logo with the speaking face for the O is something I'm really proud of and required a bit of fun SVG + motion magic. For the rest of the app I tried to keep it simple and playful and I feel it surprisingly turned out very unique and intuitive especially on mobile web.

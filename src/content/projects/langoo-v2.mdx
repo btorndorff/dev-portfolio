@@ -1,0 +1,27 @@
+export const frontmatter = {
+  title: "Langoo (v2)",
+  slug: "langoo-v2",
+  description: "Prototyping a personalized Language Learning Tutor",
+  date: "2025-04-23",
+  link: "https://langoo.pages.dev",
+};
+
+import { LoomVideo } from '@/components/MDXComponents';
+
+<LoomVideo src="https://www.loom.com/embed/66e349cfdf0640c9a18a80e71b2f0b0a?sid=c85bec84-337b-4e13-bda7-59bead353346" title="Langoo Demo" />
+
+Langoo is a personalized language learning tutor that remembers your language learning journey and adapts to your needs to help you learn a language faster.
+
+## Features
+
+- **Human-like understanding and speaking** - Thanks to OpenAI's Speech-to-Speech model, Langoo can understand and respond naturally
+- **Persisted Memory** - Langoo remembers his lessons with you thanks to Mem0
+- **Tailored curriculums** - Personalized learning paths for each user based on their goals and learning style that updates as you progress
+
+## Tech Stack
+
+Built with React and Tanstack Query on the frontend, Hono.js with Drizzle ORM and SQLite on the backend. Uses OpenAI's realtime speech-to-speech API and Gemini API for the AI features. Deployed on Cloudflare with BetterAuth for authentication.
+
+## Links
+
+- [Live Demo](https://langoo.pages.dev)

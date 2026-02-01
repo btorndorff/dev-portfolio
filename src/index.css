@@ -1,5 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Prose customizations for MDX content */
+.prose {
+  --tw-prose-body: var(--raw-secondary);
+  --tw-prose-headings: var(--raw-default);
+  --tw-prose-links: var(--raw-primary);
+  --tw-prose-bold: var(--raw-default);
+  --tw-prose-quotes: var(--raw-secondary);
+  --tw-prose-code: var(--raw-default);
+}
+
+.prose :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply text-lg font-bold mt-8 mb-3;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply text-base font-bold mt-6 mb-2;
+}
+
+.prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply text-sm leading-relaxed;
+}
+
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply text-primary hover:underline;
+}
+
+.prose :where(ul):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply text-sm;
+}
+
+.prose :where(li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply my-1;
+}
 
 :root {
   --raw-default: rgba(0, 0, 0, 1);

@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
+import { getAllProjects } from "@/lib/projects";
 
 interface ProjectCardProps {
   title: string;
@@ -37,44 +38,30 @@ const ProjectCard = ({ title, link, description, date }: ProjectCardProps) => {
   );
 };
 
-const projectCards: ProjectCardProps[] = [
-  {
-    title: "Noi",
-    description: "Language learning video logs with feedback",
-    link: "/projects/noi",
-    date: new Date("2025-12-27"),
-  },
-  {
-    title: "Langoo",
-    description: "Prototyping a personalized Language Learning Tutor",
-    link: "/projects/langoo-v2",
-    date: new Date("2025-04-23"),
-  },
-  {
-    title: "LangCard",
-    description:
-      "Generative language learning flashcards to help create effective study materials",
-    link: "/projects/langcard",
-    date: new Date("2024-10-16"),
-  },
-];
-
 const Projects = () => {
+  const projects = getAllProjects();
+
+  const projectCards = projects.map((project) => ({
+    title: project.frontmatter.title,
+    description: project.frontmatter.description,
+    link: `/projects/${project.frontmatter.slug}`,
+    date: new Date(project.frontmatter.date),
+  }));
+
   return (
     <div className="flex flex-col gap-3">
       {projectCards.map((project, index) => (
-        <>
+        <div key={project.link}>
           <ProjectCard
-            key={project.link}
             title={project.title}
             description={project.description}
             link={project.link}
             date={project.date}
           />
           {index < projectCards.length - 1 && (
-            <div className="bg-gray-400/20 h-[1px] w-full" />
+            <div className="bg-gray-400/20 h-[1px] w-full mt-3" />
           )}
-        </>
+        </div>
       ))}
     </div>
   );
