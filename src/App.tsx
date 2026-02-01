@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import About from "@/pages/About";
 import Projects from "@/pages/Projects";
-import Photos from "@/pages/Photos";
 import ProjectPage from "@/pages/ProjectPage";
 import { CursorTooltipProvider } from "@/context/CursorTooltipContext";
 import CursorTooltip from "@/components/CursorTooltip";
@@ -15,50 +14,77 @@ import { AnimatePresence, motion } from "motion/react";
 import HalftoneBackground from "@/components/HalftoneBackground";
 import Paper from "@/components/Paper";
 import Header from "@/components/Header";
+import PhotosLayout from "@/components/PhotosLayout";
 import { playPaperSlip, playPaperClick } from "@/lib/sounds";
+import Photos from "@/pages/Photos";
+import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
+import { cn } from "./lib/utils";
 
 function AnimatedPaper() {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        initial={{ y: "100vh" }}
-        animate={{ y: 0 }}
-        exit={{ y: "100vh" }}
-        transition={{
-          type: "spring",
-          stiffness: 300,
-          damping: 25,
-        }}
-        onAnimationStart={(definition) => {
-          if (typeof definition === "object" && definition.y === "100vh") {
-            playPaperSlip();
-          }
-        }}
-        onAnimationComplete={(definition) => {
-          if (typeof definition === "object" && definition.y === 0) {
-            playPaperClick();
-          }
-        }}
-        className="w-full flex justify-center"
-      >
-        <Paper>
-          <div className="flex flex-col justify-between gap-8 flex-1">
-            <Header />
-            <Routes location={location}>
-              <Route path="/" element={<About />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/photos" element={<Photos />} />
-              <Route path="/projects/:slug" element={<ProjectPage />} />
-            </Routes>
-            <Footer />
-          </div>
-        </Paper>
-      </motion.div>
-    </AnimatePresence>
+    <div
+      className={cn(
+        "relative z-10 min-h-screen flex flex-col items-center pt-[15vh] overflow-hidden",
+        isDesktopPhotosPage() && "justify-end pointer-events-none",
+      )}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ y: "100vh" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100vh" }}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 25,
+          }}
+          onAnimationStart={(definition) => {
+            if (typeof definition === "object" && definition.y === "100vh") {
+              playPaperSlip();
+            }
+          }}
+          onAnimationComplete={(definition) => {
+            if (typeof definition === "object" && definition.y === 0) {
+              playPaperClick();
+            }
+          }}
+          className="w-full flex justify-center"
+        >
+          <Paper
+            className={cn(
+              isDesktopPhotosPage() &&
+                "!min-h-0 !h-fit after:!h-screen after:bottom-0 pointer-events-auto",
+            )}
+          >
+            <div className="flex flex-col justify-between gap-8 flex-1">
+              <Header />
+              <Routes location={location}>
+                <Route path="/" element={<About />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:slug" element={<ProjectPage />} />
+                <Route path="/photos" element={<Photos />} />
+              </Routes>
+              {!isDesktopPhotosPage() && <Footer />}
+            </div>
+          </Paper>
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const isPhotosPage = location.pathname === "/photos";
+
+  // if (isPhotosPage) {
+  //   return <PhotosLayout />;
+  // }
+
+  return <AnimatedPaper />;
 }
 
 function App() {
@@ -67,9 +93,7 @@ function App() {
       <CursorTooltipProvider>
         <CursorTooltip />
         <HalftoneBackground />
-        <div className="relative z-10 min-h-screen flex flex-col items-center pt-[15vh] overflow-hidden">
-          <AnimatedPaper />
-        </div>
+        <AppContent />
       </CursorTooltipProvider>
     </Router>
   );

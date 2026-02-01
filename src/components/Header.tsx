@@ -1,6 +1,7 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
+import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
 
 const navItems = [
   { to: "/", label: "ABOUT" },
@@ -33,19 +34,24 @@ const Nav = () => {
 
 export default function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const isProjectDetail =
     location.pathname.startsWith("/projects/") &&
     location.pathname !== "/projects";
+  const isDesktopPhotosRoute = isDesktopPhotosPage();
 
-  if (isProjectDetail) {
+  if (isProjectDetail || isDesktopPhotosRoute) {
     return (
-      <div className="flex items-start w-full">
-        <Link
-          to="/projects"
-          className="flex items-center gap-2 text-black hover:text-primary transition-colors duration-300"
+      <div className="flex items-center w-full justify-between">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-black hover:text-primary transition-colors duration-300 z-10"
         >
           <ArrowLeftIcon size={20} weight="bold" />
-        </Link>
+        </button>
+        {isDesktopPhotosRoute && (
+          <span className="text-black text-sm">shot on film</span>
+        )}
       </div>
     );
   }

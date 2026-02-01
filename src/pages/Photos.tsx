@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { MasonryPhotoAlbum } from "react-photo-album";
 import "react-photo-album/masonry.css";
 import Lightbox from "yet-another-react-lightbox";
@@ -6,8 +7,10 @@ import "yet-another-react-lightbox/styles.css";
 import photos from "@/data/photos";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
 import { MagnifyingGlassPlusIcon } from "@phosphor-icons/react";
+import { useIsDesktop } from "@/hooks/useMediaQuery";
+import ScatteredPhotos from "@/components/ScatteredPhotos";
 
-const Photos = () => {
+const PhotosMobile = () => {
   const [index, setIndex] = useState(-1);
   const { setTooltip } = useCursorTooltip();
 
@@ -53,4 +56,18 @@ const Photos = () => {
   );
 };
 
-export default Photos;
+const PhotosDesktop = () => {
+  // Use portal to render outside Paper's transform context
+  // This ensures position:fixed works relative to viewport, not transformed parent
+  return createPortal(<ScatteredPhotos photos={photos} />, document.body);
+};
+
+export default function Photos() {
+  const isDesktop = useIsDesktop();
+
+  if (!isDesktop) {
+    return <PhotosMobile />;
+  }
+
+  return <PhotosDesktop />;
+}
