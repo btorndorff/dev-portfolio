@@ -44,13 +44,13 @@ export default function Footer() {
   const { setTooltip } = useCursorTooltip();
 
   return (
-    <footer className="md:absolute md:bottom-0 w-full flex justify-center items-center pb-32 md:pb-0">
-      <div className="flex justify-center md:justify-between items-center gap-2 w-full md:bg-gradient-to-t from-background-bottom via-background-bottom/85 to-transparent py-3 px-6">
-        <span className="hidden md:block text-sm font-mono text-secondary">
+    <footer className="w-full shrink-0">
+      <div className="flex justify-between items-center gap-2 w-full">
+        <span className="hidden md:block text-sm font-mono text-gray-500">
           → UPDATED 12/30/25
         </span>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 text-black">
           {socialLinks.map((link) => {
             const Icon = link.icon;
 
@@ -58,7 +58,7 @@ export default function Footer() {
               <a
                 key={link.href}
                 href={link.href}
-                className="hover:text-secondary transition-colors group"
+                className="hover:text-gray-500 transition-colors group"
                 onMouseEnter={() => setTooltip(link.tooltip)}
                 onMouseLeave={() => setTooltip(null)}
                 target="_blank"

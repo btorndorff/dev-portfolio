@@ -1,7 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
-import { useTheme } from "@/context/ThemeContext";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { SunIcon, MoonIcon } from "@phosphor-icons/react";
+import { useCursorTooltip } from "@/context/CursorTooltipContext";
 
 const navItems = [
   { to: "/", label: "ABOUT" },
@@ -11,60 +10,51 @@ const navItems = [
 
 const Nav = () => {
   return (
-    <div className="absolute left-1/2 -translate-x-1/2">
-      <div className="flex items-center gap-2 md:gap-4 text-gray-600 dark:text-gray-400 text-sm md:text-lg">
-        {navItems.map((item, index) => (
-          <>
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) =>
-                twMerge(
-                  isActive
-                    ? "text-primary"
-                    : "text-secondary hover:text-primary transition-colors duration-300"
-                )
-              }
-            >
-              {item.label}
-            </NavLink>
-            {index < navItems.length - 1 && (
-              <div className="w-[1px] bg-secondary opacity-50 h-4" />
-            )}
-          </>
-        ))}
-      </div>
+    <div className="flex flex-col items-end gap-1">
+      {navItems.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          className={({ isActive }) =>
+            twMerge(
+              "text-base",
+              isActive
+                ? "text-primary"
+                : "text-black hover:text-primary transition-colors duration-300",
+            )
+          }
+        >
+          {item.label}
+        </NavLink>
+      ))}
     </div>
   );
 };
 
-const Header = () => {
-  const { theme, toggleTheme } = useTheme();
+export default function Header() {
+  const isAbout = useLocation().pathname === "/";
+  const { setTooltip } = useCursorTooltip();
 
   return (
-    <div className="absolute w-full top-0 h-16 z-50 max-w-3xl mx-auto px-6">
-      <header className="h-full w-full flex justify-between items-center relative bg-gradient-to-b from-background-top via-background-top/85 to-transparent">
+    <div className="flex justify-between items-start w-full">
+      {isAbout ? (
+        <img
+          src="/images/pfp_lg.jpeg"
+          alt="Me"
+          className="size-32 shrink-0 object-cover"
+          onMouseEnter={() => setTooltip("me & ghib")}
+          onMouseLeave={() => setTooltip(null)}
+        />
+      ) : (
         <Link
           to="/"
-          className="text-2xl font-mono hover:text-primary transition-colors duration-300 group"
+          className="text-2xl font-mono text-black hover:text-primary transition-colors duration-300"
         >
-          <span className="group-hover:hidden">BTO.</span>
-          <span className="hidden group-hover:inline">BTO!</span>
+          BTO.
         </Link>
-        <Nav />
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-full hover:bg-gray-300/20 dark:hover:bg-gray-600/20 transition-colors"
-        >
-          {theme === "light" ? (
-            <SunIcon size={20} weight="bold" />
-          ) : (
-            <MoonIcon size={20} weight="bold" />
-          )}
-        </button>
-      </header>
+      )}
+
+      <Nav />
     </div>
   );
-};
-
-export default Header;
+}

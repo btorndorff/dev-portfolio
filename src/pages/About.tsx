@@ -14,9 +14,9 @@ const Section = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="space-y-3">
-      <div className="text-sm font-mono">{title}</div>
-      <div className="text-secondary text-lg leading-relaxed">{children}</div>
+    <div className="flex flex-col gap-4">
+      <div className="text-lg font-mono text-black">{title}</div>
+      <div className="text-gray-600 text-lg leading-relaxed">{children}</div>
     </div>
   );
 };
@@ -25,16 +25,9 @@ const About = () => {
   const { setTooltip } = useCursorTooltip();
 
   return (
-    <div className="space-y-16">
-      <div className="flex gap-6 items-center w-full">
-        <img
-          src="/images/pfp_lg.jpeg"
-          alt="Me"
-          className="size-32 shrink-0 object-cover"
-          onMouseEnter={() => setTooltip("me & ghib")}
-          onMouseLeave={() => setTooltip(null)}
-        />
-        <h1 className="text-3xl md:text-5xl font-semibold">
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-5xl font-bold text-black">
           Hi there, I'm{" "}
           <span
             onMouseEnter={() => setTooltip("me")}

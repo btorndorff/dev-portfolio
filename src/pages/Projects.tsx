@@ -11,6 +11,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ title, link, description, date }: ProjectCardProps) => {
   const { setTooltip } = useCursorTooltip();
+
   return (
     <Link
       to={link}
@@ -22,9 +23,9 @@ const ProjectCard = ({ title, link, description, date }: ProjectCardProps) => {
       onClick={() => setTooltip(null)}
     >
       <div className="h-full flex flex-col gap-3">
-        <h2 className="text-lg font-bold">{title}</h2>
-        {description && <p className="text-secondary">{description}</p>}
-        <span className="text-sm text-secondary">
+        <h2 className="text-lg font-bold text-black">{title}</h2>
+        {description && <p className="text-gray-600">{description}</p>}
+        <span className="text-sm text-gray-500">
           {date.toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",

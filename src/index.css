@@ -6,16 +6,8 @@
   --raw-primary: rgba(222, 69, 53, 1);
   --raw-secondary: rgba(75, 85, 99, 1);
   --raw-background: rgba(255, 255, 255, 1);
-  --raw-background-top: rgba(255, 255, 255, 1);
-  --raw-background-bottom: rgba(255, 255, 255, 1);
-}
-
-.dark {
-  --raw-default: rgba(255, 255, 255, 1);
-  --raw-primary: #2067ff;
-  --raw-secondary: rgba(156, 163, 175, 1);
-  --raw-background-top: #000312;
-  --raw-background-bottom: #070d2b;
+  --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='6' cy='6' r='5' fill='%23DE4535'/%3E%3C/svg%3E") 6 6, auto;
+  --cursor-pointer: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='-2 -2 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.317093 6.14239C-1.10242 2.49323 2.49321 -1.1024 6.14237 0.31712L22.2537 6.58441C25.2817 7.76231 26.1017 11.6628 23.8043 13.9603L13.9602 23.8043C11.6628 26.1017 7.76228 25.2818 6.58438 22.2537L0.317093 6.14239Z' fill='%23DE4535'/%3E%3C/svg%3E") 6 6, pointer;
 }
 
 @theme {
@@ -36,17 +28,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   cursor: var(--cursor-default);
   background: var(--raw-background);
-}
-
-.dark body {
-  background: linear-gradient(
-    to bottom,
-    var(--raw-background-top) 50%,
-    var(--raw-background-bottom) 100%
-  );
 }
 
 a,

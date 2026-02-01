@@ -13,12 +13,12 @@ const Photos = () => {
 
   const shuffledPhotos = useMemo(
     () => [...photos].sort(() => Math.random() - 0.5),
-    [photos]
+    [photos],
   );
 
   return (
-    <div className="space-y-8">
-      <span>shot on film</span>
+    <div className="flex flex-col gap-8">
+      <span className="text-black">shot on film</span>
 
       <MasonryPhotoAlbum
         photos={shuffledPhotos}
