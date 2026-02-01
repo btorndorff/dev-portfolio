@@ -1,31 +1,10 @@
 let audioContext: AudioContext | null = null;
-let isUnlocked = false;
 
 function getAudioContext(): AudioContext {
   if (!audioContext) {
     audioContext = new AudioContext();
   }
   return audioContext;
-}
-
-// Unlock audio on first user interaction (required for mobile Safari)
-export function unlockAudio(): void {
-  if (isUnlocked) return;
-
-  const ctx = getAudioContext();
-
-  // Create and play a silent buffer to unlock
-  const buffer = ctx.createBuffer(1, 1, ctx.sampleRate);
-  const source = ctx.createBufferSource();
-  source.buffer = buffer;
-  source.connect(ctx.destination);
-  source.start(0);
-
-  if (ctx.state === "suspended") {
-    ctx.resume();
-  }
-
-  isUnlocked = true;
 }
 
 /**
