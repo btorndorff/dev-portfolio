@@ -64,7 +64,7 @@ const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
         onMouseLeave={handleMouseLeave}
       >
         <div
-          className="relative overflow-hidden rounded-sm"
+          className="relative overflow-hidden"
           style={{
             boxShadow: isDragging
               ? "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
