@@ -5,7 +5,7 @@ import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
 
 const navItems = [
   { to: "/", label: "ABOUT" },
-  { to: "/projects", label: "PROJECTS" },
+  { to: "/writing", label: "WRITING" },
   { to: "/photos", label: "PHOTOS" },
 ];
 
@@ -35,12 +35,12 @@ const Nav = () => {
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isProjectDetail =
-    location.pathname.startsWith("/projects/") &&
-    location.pathname !== "/projects";
+  const isWritingDetail =
+    location.pathname.startsWith("/writing/") &&
+    location.pathname !== "/writing";
   const isDesktopPhotosRoute = isDesktopPhotosPage();
 
-  if (isProjectDetail || isDesktopPhotosRoute) {
+  if (isWritingDetail || isDesktopPhotosRoute) {
     return (
       <div className="flex items-center w-full justify-between">
         <button

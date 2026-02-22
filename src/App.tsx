@@ -5,8 +5,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import About from "@/pages/About";
-import Projects from "@/pages/Projects";
-import ProjectPage from "@/pages/ProjectPage";
+import Writing from "@/pages/Writing";
+import WritingPage from "@/pages/WritingPage";
 import { CursorTooltipProvider } from "@/context/CursorTooltipContext";
 import CursorTooltip from "@/components/CursorTooltip";
 import Footer from "@/components/Footer";
@@ -64,8 +64,8 @@ function AppContent() {
                 <Header />
                 <Routes location={location}>
                   <Route path="/" element={<About />} />
-                  <Route path="/projects" element={<Projects />} />
-                  <Route path="/projects/:slug" element={<ProjectPage />} />
+                  <Route path="/writing" element={<Writing />} />
+                  <Route path="/writing/:slug" element={<WritingPage />} />
                   <Route path="/photos" element={<Photos />} />
                 </Routes>
               </div>

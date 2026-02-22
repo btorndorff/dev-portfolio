@@ -80,7 +80,7 @@ const About = () => {
         <p>
           When I'm not working, I'm building tools like{" "}
           <Link
-            to="/projects/noi"
+            to="/writing/noi"
             className="text-primary hover:underline"
             onMouseEnter={() =>
               setTooltip(<HandPointingIcon size={16} weight="bold" />)

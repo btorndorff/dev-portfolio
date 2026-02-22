@@ -1,23 +1,23 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
-import { getProjectBySlug } from '@/lib/projects';
+import { getWritingBySlug } from '@/lib/writing';
 import { mdxComponents } from '@/components/MDXComponents';
 import { Article } from '@/components/Article';
 
-const ProjectPage = () => {
+const WritingPage = () => {
   const { slug } = useParams<{ slug: string }>();
 
   if (!slug) {
-    return <Navigate to="/projects" replace />;
+    return <Navigate to="/writing" replace />;
   }
 
-  const project = getProjectBySlug(slug);
+  const entry = getWritingBySlug(slug);
 
-  if (!project) {
-    return <Navigate to="/projects" replace />;
+  if (!entry) {
+    return <Navigate to="/writing" replace />;
   }
 
-  const { frontmatter, Component } = project;
+  const { frontmatter, Component } = entry;
 
   return (
     <MDXProvider components={mdxComponents}>
@@ -28,4 +28,4 @@ const ProjectPage = () => {
   );
 };
 
-export default ProjectPage;
+export default WritingPage;

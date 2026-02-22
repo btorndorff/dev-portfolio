@@ -1,16 +1,16 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
-import { getAllProjects } from "@/lib/projects";
+import { getAllWriting } from "@/lib/writing";
 
-interface ProjectCardProps {
+interface WritingCardProps {
   title: string;
   link: string;
   description?: string;
   date: Date;
 }
 
-const ProjectCard = ({ title, link, description, date }: ProjectCardProps) => {
+const WritingCard = ({ title, link, description, date }: WritingCardProps) => {
   const { setTooltip } = useCursorTooltip();
 
   return (
@@ -38,27 +38,27 @@ const ProjectCard = ({ title, link, description, date }: ProjectCardProps) => {
   );
 };
 
-const Projects = () => {
-  const projects = getAllProjects();
+const Writing = () => {
+  const entries = getAllWriting();
 
-  const projectCards = projects.map((project) => ({
-    title: project.frontmatter.title,
-    description: project.frontmatter.description,
-    link: `/projects/${project.frontmatter.slug}`,
-    date: new Date(project.frontmatter.date),
+  const cards = entries.map((entry) => ({
+    title: entry.frontmatter.title,
+    description: entry.frontmatter.description,
+    link: `/writing/${entry.frontmatter.slug}`,
+    date: new Date(entry.frontmatter.date),
   }));
 
   return (
     <div className="flex flex-col gap-3">
-      {projectCards.map((project, index) => (
-        <div key={project.link}>
-          <ProjectCard
-            title={project.title}
-            description={project.description}
-            link={project.link}
-            date={project.date}
+      {cards.map((card, index) => (
+        <div key={card.link}>
+          <WritingCard
+            title={card.title}
+            description={card.description}
+            link={card.link}
+            date={card.date}
           />
-          {index < projectCards.length - 1 && (
+          {index < cards.length - 1 && (
             <div className="bg-gray-400/20 h-[1px] w-full mt-3" />
           )}
         </div>
@@ -67,4 +67,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Writing;
