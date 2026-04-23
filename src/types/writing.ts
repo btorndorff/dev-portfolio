@@ -5,6 +5,7 @@ export interface WritingFrontmatter {
   date: string;
   link?: string;
   hidden?: boolean;
+  ogImage?: string;
 }
 
 export interface WritingModule {
