@@ -60,7 +60,8 @@ const About = () => {
           >
             Replo
           </a>
-          , building an AI native ecommerce platform. Before that, I was at{" "}
+          , building an Agent to help you sell anything online. Before that, I
+          was at{" "}
           <a
             href="https://www.cambly.com/"
             target="_blank"
@@ -72,7 +73,7 @@ const About = () => {
           >
             Cambly
           </a>{" "}
-          helping people learn English online.
+          helping people learn English.
         </p>
       </Section>
 
