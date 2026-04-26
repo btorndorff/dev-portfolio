@@ -21,7 +21,7 @@ const Nav = () => {
               "text-base",
               isActive
                 ? "text-primary"
-                : "text-black hover:text-primary transition-colors duration-300",
+                : "text-gray-600 hover:text-black transition-colors duration-300",
             )
           }
         >
