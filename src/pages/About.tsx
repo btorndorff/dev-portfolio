@@ -60,7 +60,7 @@ const About = () => {
           >
             Replo
           </a>
-          , building an Agent to help you sell anything online. Before that, I
+          , building an agent to help you sell anything online. Before that, I
           was at{" "}
           <a
             href="https://www.cambly.com/"
