@@ -93,3 +93,24 @@ img,
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/*
+ * Subtle paper-fiber texture via an inline SVG filter.
+ * feTurbulence generates fractal noise; feColorMatrix desaturates it and
+ * dials the alpha way down so it reads as faint grey speckle, not static.
+ * The noise sits as a background-image over the element's white background.
+ */
+/*
+ * Ink bleed: the SVG filter (defined in Paper.tsx) roughens letterform edges;
+ * the same-color text-shadow feathers the wicking so it reads as ink soaking
+ * into the paper rather than a hard jagged edge. Kept subtle for legibility.
+ */
+@utility ink-bleed {
+  filter: url(#ink-bleed);
+  text-shadow: 0 0 0.35px currentColor;
+}
+
+@utility paper-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}

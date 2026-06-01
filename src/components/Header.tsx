@@ -5,7 +5,7 @@ import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
 
 const navItems = [
   { to: "/", label: "ABOUT" },
-  { to: "/writing", label: "WRITING" },
+  { to: "/writing", label: "THINGS & STUFF" },
   { to: "/photos", label: "PHOTOS" },
 ];
 
@@ -47,7 +47,7 @@ export default function Header() {
           onClick={() =>
             window.history.length > 1 ? navigate(-1) : navigate("/")
           }
-          className="flex items-center gap-2 text-black hover:text-primary transition-colors duration-300 z-10"
+          className="flex items-center gap-2 text-black hover:text-gray-500 transition-colors z-10"
         >
           <ArrowLeftIcon size={20} weight="bold" />
         </button>
