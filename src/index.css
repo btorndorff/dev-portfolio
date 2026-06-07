@@ -104,20 +104,22 @@ img,
  * Ink bleed: the SVG filter (defined in Paper.tsx) roughens letterform edges;
  * the same-color text-shadow feathers the wicking so it reads as ink soaking
  * into the paper rather than a hard jagged edge. Kept subtle for legibility.
+ *
+ * Applied to individual text/icon elements inside .ink-bleed-scope rather than
+ * to the scope wrapper itself. A single filter on the wrapper rasterizes the
+ * whole subtree into one layer, and mobile Safari blanks that layer when it's
+ * too tall (the /photos grid) — so every element under it disappears. Filtering
+ * small leaf elements keeps each filtered layer tiny, well under Safari's limit.
+ * The :where() keeps specificity at 0 so component styles still win, and the
+ * .photo-grid carve-out leaves the image grid unfiltered (it renders sharp).
  */
-@utility ink-bleed {
+.ink-bleed-scope
+  :where(
+    p, h1, h2, h3, h4, h5, h6, span, a, li, ul, ol, strong, em, blockquote,
+    code, pre, time, small, figcaption, label, button, svg
+  ):not(.photo-grid *) {
   filter: url(#ink-bleed);
   text-shadow: 0 0 0.35px currentColor;
-}
-
-/*
- * The ink-bleed filter is for text only. On mobile Safari, applying an SVG
- * url() filter to a subtree containing lazy-loaded <img>s leaves the images
- * blank (the filter snapshots before they decode and never repaints). Opt
- * images out of the inherited filter so the photo grid paints normally.
- */
-.ink-bleed img {
-  filter: none;
 }
 
 @utility paper-texture {

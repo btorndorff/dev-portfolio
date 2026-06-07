@@ -36,7 +36,7 @@ export default function Paper({ children, className = "" }: PaperProps) {
           />
         </filter>
       </svg>
-      <div className="ink-bleed flex flex-1 flex-col">{children}</div>
+      <div className="ink-bleed-scope flex flex-1 flex-col">{children}</div>
     </div>
   );
 }

@@ -23,22 +23,29 @@ const PhotosMobile = () => {
     <div className="flex flex-col gap-8">
       <span className="text-black">shot on film</span>
 
-      <MasonryPhotoAlbum
-        photos={shuffledPhotos}
-        columns={(containerWidth) => {
-          if (containerWidth < 480) return 1;
-          return 2;
-        }}
-        onClick={({ index }) => setIndex(index)}
-        spacing={12}
-        componentsProps={{
-          image: {
-            onMouseEnter: () =>
-              setTooltip(<MagnifyingGlassPlusIcon size={16} weight="bold" />),
-            onMouseLeave: () => setTooltip(null),
-          },
-        }}
-      />
+      {/*
+        photo-grid opts out of the ink-bleed filter: mobile Safari blanks the
+        whole filtered subtree when this tall image grid is under the SVG
+        url() filter. See .ink-bleed-scope in src/index.css.
+      */}
+      <div className="photo-grid">
+        <MasonryPhotoAlbum
+          photos={shuffledPhotos}
+          columns={(containerWidth) => {
+            if (containerWidth < 480) return 1;
+            return 2;
+          }}
+          onClick={({ index }) => setIndex(index)}
+          spacing={12}
+          componentsProps={{
+            image: {
+              onMouseEnter: () =>
+                setTooltip(<MagnifyingGlassPlusIcon size={16} weight="bold" />),
+              onMouseLeave: () => setTooltip(null),
+            },
+          }}
+        />
+      </div>
 
       <Lightbox
         open={index >= 0}
