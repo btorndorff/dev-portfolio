@@ -15,7 +15,7 @@ const Section = ({
 }) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="text-base font-mono text-black">{title}</div>
+      <h2 className="text-base font-mono text-black">{title}</h2>
       <div className="text-gray-600 leading-relaxed text">{children}</div>
     </div>
   );
