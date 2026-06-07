@@ -1,14 +1,15 @@
-export interface WritingFrontmatter {
+export interface ContentFrontmatter {
   title: string;
   slug: string;
   description: string;
   date: string;
+  previewMedia: string;
   link?: string;
   hidden?: boolean;
   ogImage?: string;
 }
 
-export interface WritingModule {
+export interface ContentModule {
   default: React.ComponentType;
-  frontmatter: WritingFrontmatter;
+  frontmatter: ContentFrontmatter;
 }

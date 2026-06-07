@@ -1,31 +1,35 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
-import { getWritingBySlug } from '@/lib/writing';
+import { getEntryBySlug, type Section } from '@/lib/content';
 import { mdxComponents } from '@/components/MDXComponents';
 import { Article } from '@/components/Article';
 
-const WritingPage = () => {
+const ContentPage = ({ section }: { section: Section }) => {
   const { slug } = useParams<{ slug: string }>();
 
   if (!slug) {
-    return <Navigate to="/writing" replace />;
+    return <Navigate to={`/${section}`} replace />;
   }
 
-  const entry = getWritingBySlug(slug);
+  const entry = getEntryBySlug(section, slug);
 
   if (!entry) {
-    return <Navigate to="/writing" replace />;
+    return <Navigate to={`/${section}`} replace />;
   }
 
   const { frontmatter, Component } = entry;
 
   return (
     <MDXProvider components={mdxComponents}>
-      <Article title={frontmatter.title} date={frontmatter.date} link={frontmatter.link}>
+      <Article
+        title={frontmatter.title}
+        date={frontmatter.date}
+        link={frontmatter.link}
+      >
         <Component />
       </Article>
     </MDXProvider>
   );
 };
 
-export default WritingPage;
+export default ContentPage;

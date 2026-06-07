@@ -5,28 +5,31 @@ import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
 
 const navItems = [
   { to: "/", label: "ABOUT" },
-  { to: "/writing", label: "THINGS & STUFF" },
+  { to: "/work", label: "WORK" },
+  { to: "/play", label: "PLAY" },
   { to: "/photos", label: "PHOTOS" },
 ];
 
 const Nav = () => {
   return (
-    <div className="flex flex-col items-end gap-1">
-      {navItems.map((item) => (
-        <NavLink
-          key={item.to}
-          to={item.to}
-          className={({ isActive }) =>
-            twMerge(
-              "text-base",
-              isActive
-                ? "text-primary"
-                : "text-gray-600 hover:text-black transition-colors duration-300",
-            )
-          }
-        >
-          {item.label}
-        </NavLink>
+    <div className="flex gap-0.5 md:gap-2">
+      {navItems.map((item, i) => (
+        <span key={item.to} className="flex gap-2">
+          {i > 0 && <span className="text-gray-400">·</span>}
+          <NavLink
+            to={item.to}
+            className={({ isActive }) =>
+              twMerge(
+                "text-base",
+                isActive
+                  ? "text-primary"
+                  : "text-gray-600 hover:text-black transition-colors duration-300",
+              )
+            }
+          >
+            {item.label}
+          </NavLink>
+        </span>
       ))}
     </div>
   );
@@ -35,12 +38,10 @@ const Nav = () => {
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isWritingDetail =
-    location.pathname.startsWith("/writing/") &&
-    location.pathname !== "/writing";
+  const isContentDetail = /^\/(work|play)\/.+/.test(location.pathname);
   const isDesktopPhotosRoute = isDesktopPhotosPage();
 
-  if (isWritingDetail || isDesktopPhotosRoute) {
+  if (isContentDetail || isDesktopPhotosRoute) {
     return (
       <div className="flex items-center w-full justify-between">
         <button
@@ -59,10 +60,10 @@ export default function Header() {
   }
 
   return (
-    <div className="flex justify-between items-start w-full">
+    <div className="flex justify-between items-center w-full">
       <Link
         to="/"
-        className="text-2xl font-mono text-black hover:text-primary transition-colors duration-300"
+        className="text-xl font-mono text-black hover:text-primary transition-colors duration-300"
       >
         <span className="group">
           BTO<span className="inline-block group-hover:hidden">.</span>

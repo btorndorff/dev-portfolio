@@ -8,14 +8,27 @@ import {
 
 const Section = ({
   title,
+  to,
   children,
 }: {
   title: string;
+  to: string;
   children: React.ReactNode;
 }) => {
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-base font-mono text-black">{title}</h2>
+      <h2 className="text-base font-mono">
+        <Link
+          to={to}
+          className="group text-black hover:text-gray-500 transition-colors duration-300"
+        >
+          {/* dashes swap to dots on hover, mirroring the BTO logo's . -> ! */}
+          <span className="inline-block group-hover:hidden">-</span>
+          <span className="hidden group-hover:inline-block">·</span> {title}{" "}
+          <span className="inline-block group-hover:hidden">-</span>
+          <span className="hidden group-hover:inline-block">·</span>
+        </Link>
+      </h2>
       <div className="text-gray-600 leading-relaxed text">{children}</div>
     </div>
   );
@@ -45,7 +58,7 @@ const About = () => {
         </h1>
       </div>
 
-      <Section title="- WORK -">
+      <Section title="WORK" to="/work">
         <p>
           Full stack engineer in SF passionate about crafting beautiful user
           experiences. Currently at{" "}
@@ -77,11 +90,11 @@ const About = () => {
         </p>
       </Section>
 
-      <Section title="- LIFE -">
+      <Section title="PLAY" to="/play">
         <p>
           When I'm not working, I'm building tools like{" "}
           <Link
-            to="/writing/noi"
+            to="/play/noi"
             className="text-primary hover:underline"
             onMouseEnter={() =>
               setTooltip(<HandPointingIcon size={16} weight="bold" />)

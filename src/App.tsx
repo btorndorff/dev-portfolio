@@ -5,8 +5,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import About from "@/pages/About";
-import Writing from "@/pages/Writing";
-import WritingPage from "@/pages/WritingPage";
+import ContentList from "@/pages/ContentList";
+import ContentPage from "@/pages/ContentPage";
 import { CursorTooltipProvider } from "@/context/CursorTooltipContext";
 import CursorTooltip from "@/components/CursorTooltip";
 import Footer from "@/components/Footer";
@@ -26,8 +26,8 @@ function AppContent() {
   return (
     <div
       className={cn(
-        "relative z-10 min-h-screen flex flex-col items-center pt-[15vh] overflow-hidden",
-        isDesktopPhotosRoute && "justify-end pointer-events-none"
+        "relative z-10 min-h-screen flex flex-col items-center pt-[8vh] overflow-hidden",
+        isDesktopPhotosRoute && "justify-end pointer-events-none",
       )}
     >
       <AnimatePresence mode="wait">
@@ -56,7 +56,7 @@ function AppContent() {
           <Paper
             className={cn(
               isDesktopPhotosRoute &&
-                "!min-h-0 !h-fit after:!h-screen after:bottom-0 pointer-events-auto"
+                "!min-h-0 !h-fit after:!h-screen after:bottom-0 pointer-events-auto",
             )}
           >
             <div className="flex flex-col justify-between gap-8 flex-1">
@@ -64,8 +64,16 @@ function AppContent() {
                 <Header />
                 <Routes location={location}>
                   <Route path="/" element={<About />} />
-                  <Route path="/writing" element={<Writing />} />
-                  <Route path="/writing/:slug" element={<WritingPage />} />
+                  <Route path="/work" element={<ContentList section="work" />} />
+                  <Route
+                    path="/work/:slug"
+                    element={<ContentPage section="work" />}
+                  />
+                  <Route path="/play" element={<ContentList section="play" />} />
+                  <Route
+                    path="/play/:slug"
+                    element={<ContentPage section="play" />}
+                  />
                   <Route path="/photos" element={<Photos />} />
                 </Routes>
               </div>

@@ -5,14 +5,15 @@ import vm from "node:vm";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
-const writingDir = join(root, "src/content/writing");
 const distDir = join(root, "dist");
 const distIndex = join(distDir, "index.html");
+
+const SECTIONS = ["work", "play"];
 
 const SITE_URL = (process.env.SITE_URL || "https://benorndorff.me").replace(/\/$/, "");
 const DEFAULT_OG = "/og/default.png";
 const SITE_TITLE = "Ben Orndorff";
-const SITE_DESCRIPTION = "Ben Orndorff — writing, projects, photos.";
+const SITE_DESCRIPTION = "Ben Orndorff — work, play, photos.";
 
 function extractFrontmatter(source) {
   const match = source.match(/export\s+const\s+frontmatter\s*=\s*(\{[\s\S]*?\n\})\s*;?/);
@@ -55,36 +56,44 @@ function injectHead(html, { title, metaTags }) {
 
 const shell = readFileSync(distIndex, "utf8");
 
-const postFiles = readdirSync(writingDir).filter((f) => f.endsWith(".mdx"));
-const posts = [];
-for (const file of postFiles) {
-  const source = readFileSync(join(writingDir, file), "utf8");
-  const fm = extractFrontmatter(source);
-  if (!fm) {
-    console.warn(`[prerender] skipping ${file}: no frontmatter`);
+let total = 0;
+for (const section of SECTIONS) {
+  const contentDir = join(root, "src/content", section);
+  let files;
+  try {
+    files = readdirSync(contentDir).filter((f) => f.endsWith(".mdx"));
+  } catch {
+    console.warn(`[prerender] no content dir for ${section}, skipping`);
     continue;
   }
-  if (fm.hidden) continue;
-  posts.push(fm);
-}
 
-for (const fm of posts) {
-  const slug = fm.slug;
-  const image = fm.ogImage || DEFAULT_OG;
-  const url = `${SITE_URL}/writing/${slug}`;
-  const pageTitle = `${fm.title} — ${SITE_TITLE}`;
-  const metaTags = buildMetaTags({
-    title: fm.title,
-    description: fm.description,
-    image,
-    url,
-    type: "article",
-  });
-  const html = injectHead(shell, { title: pageTitle, metaTags });
-  const outDir = join(distDir, "writing", slug);
-  mkdirSync(outDir, { recursive: true });
-  writeFileSync(join(outDir, "index.html"), html, "utf8");
-  console.log(`[prerender] writing/${slug} -> ${image}`);
+  for (const file of files) {
+    const source = readFileSync(join(contentDir, file), "utf8");
+    const fm = extractFrontmatter(source);
+    if (!fm) {
+      console.warn(`[prerender] skipping ${section}/${file}: no frontmatter`);
+      continue;
+    }
+    if (fm.hidden) continue;
+
+    const slug = fm.slug;
+    const image = fm.ogImage || DEFAULT_OG;
+    const url = `${SITE_URL}/${section}/${slug}`;
+    const pageTitle = `${fm.title} — ${SITE_TITLE}`;
+    const metaTags = buildMetaTags({
+      title: fm.title,
+      description: fm.description,
+      image,
+      url,
+      type: "article",
+    });
+    const html = injectHead(shell, { title: pageTitle, metaTags });
+    const outDir = join(distDir, section, slug);
+    mkdirSync(outDir, { recursive: true });
+    writeFileSync(join(outDir, "index.html"), html, "utf8");
+    console.log(`[prerender] ${section}/${slug} -> ${image}`);
+    total += 1;
+  }
 }
 
 const rootMeta = buildMetaTags({
@@ -96,4 +105,4 @@ const rootMeta = buildMetaTags({
 });
 writeFileSync(distIndex, injectHead(shell, { title: SITE_TITLE, metaTags: rootMeta }), "utf8");
 console.log(`[prerender] root index.html patched`);
-console.log(`[prerender] done (${posts.length} post${posts.length === 1 ? "" : "s"})`);
+console.log(`[prerender] done (${total} post${total === 1 ? "" : "s"})`);

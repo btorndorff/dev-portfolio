@@ -1,8 +1,8 @@
 declare module '*.mdx' {
   import type { ComponentType } from 'react';
-  import type { WritingFrontmatter } from '@/types/writing';
+  import type { ContentFrontmatter } from '@/types/content';
 
-  export const frontmatter: WritingFrontmatter;
+  export const frontmatter: ContentFrontmatter;
   const MDXComponent: ComponentType;
   export default MDXComponent;
 }
