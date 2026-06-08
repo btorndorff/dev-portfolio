@@ -9,7 +9,7 @@ export default function Paper({ children, className = "" }: PaperProps) {
   return (
     <div
       className={cn(
-        "relative bg-white paper-texture w-[95%] sm:w-[85%] lg:w-[60%] max-w-3xl min-h-[92vh] flex flex-col shadow-lg p-6",
+        "relative bg-white paper-texture w-[95%] sm:w-[85%] lg:w-[60%] max-w-3xl min-h-[92vh] flex flex-col shadow-lg p-6 pb-3",
         "after:absolute after:top-[calc(100%-1px)] after:left-0 after:right-0 after:h-screen after:bg-white",
         className,
       )}

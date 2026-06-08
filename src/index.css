@@ -28,6 +28,35 @@
   @apply text-primary hover:underline;
 }
 
+/* Typography wraps inline code in literal backticks via ::before/::after and
+ * bolds it. Drop both so inline code (and <File>) reads clean. */
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-weight: inherit;
+}
+.prose
+  :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose
+  :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+  content: none;
+}
+
+/* Fenced code blocks: typography defaults to a dark full-bleed <pre>. Override
+ * to a soft gray card so it fits the paper aesthetic. */
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply font-mono text-xs leading-relaxed rounded-lg p-4;
+  background-color: rgba(0, 0, 0, 0.04);
+  color: var(--raw-default);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.prose
+  :where(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply font-mono text-xs;
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
 .prose :where(ul):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   @apply text-sm;
 }

@@ -63,7 +63,7 @@ export default function Header() {
     <div className="flex justify-between items-center w-full">
       <Link
         to="/"
-        className="text-xl font-mono text-black hover:text-primary transition-colors duration-300"
+        className="text-base md:text-xl font-mono text-black hover:text-primary transition-colors duration-300"
       >
         <span className="group">
           BTO<span className="inline-block group-hover:hidden">.</span>
