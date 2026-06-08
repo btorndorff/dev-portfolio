@@ -12,19 +12,19 @@ import { File, Video } from "@/components/MDXComponents";
 
 <Video src="https://assets.benorndorff.me/claude-anki.mp4" />
 
-I restarted learning Vietnamese again back in the fall and after learning Japanese I was suprised by how few resources were available for learning compared to it. I was accustomed to being handfed my fleshed out most common words anki deck and could not find anything even remotley close for vietnamese. I dread having to understand the complexity of anki and manage it on my own which led me to using claude code to manage it fully for me. A fun realization after working on agents for the past year has been <a href="https://zarazhang.substack.com/p/coding-agents-are-general-agents">coding agents are general agents</a> and that maps perfectly to the task of managing an anki deck.
+I restarted learning Vietnamese back in the fall and realized I was pampered by Japanese which has a cornocopia of learning resources to pick from. For Vietnamese I simply wanted a top 1000 most common words anki deck with example sentences and audio but to my dismay there was nothing close. The thought of trying to understand and manually build that anki deck from scratch left me with dread so instead I looked to how an agent could help me with this.
 
-I created a project for my claude code agent with specific prompting, skills, and mcps that allow it to fully run my Vietnamese anki deck. This includes creating new cards (with audio), mass editing and suspending cards, and even can act as a tutor with full context on the vocab I am learning. Here's an overview of how it works:
+A fun realization after working on agents for the past year has been <a href="https://zarazhang.substack.com/p/coding-agents-are-general-agents">coding agents are general agents</a> and they map perfectly to the task of managing an anki deck. I created a project for my claude code agent with specific prompting, skills, and mcps allowing it to fully run my Vietnamese deck for me. Here's an overview of how it works:
 
-## System Prompt & <File>USER.md</File>
+## System Prompt & USER.md
 
-Coding agents like claude code ship with some default prompting on their purpose from their providers which usually entails specific directives about being a coding agent. The system prompt defined in <File>CLAUDE.md</File> for this project needed to override that a bit and was built with the agents new responsibilites in mind, managing a language learing anki deck. The system prompt also has a fun piece of context that allows the agent to know exactly what card I am on right now:
+Coding agents like claude code ship with some default prompting on their purpose from their providers which usually entails specific directives about being a coding agent. My system prompt defined in <File>CLAUDE.md</File> overrides this and explains to the agent its new responsibilites of managing a language learing anki deck. The system prompt also has a fun piece of context that allows the agent to know exactly what card I'm on:
 
 ```
 Current card: !`curl -s localhost:8765 -X POST -d '{"action": "guiCurrentCard", "version": 6}' 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); r=d.get('result'); fields=r.get('fields',{}) if r else {}; parts=[f'{k}={v[\"value\"]}' for k,v in fields.items() if v.get('value')]; print(' | '.join(parts) if parts else 'No card open')" 2>/dev/null || echo "Anki not running"`
 ```
 
-We also have <File>USER.md</File> where I have added the personalized info about my language learning and anki deck like what language, accent, and level I'm at + which deck, model, and specific ways I like my cards created. this <File>USER.md</File> file is connected as context in the system prompt so the agent always sees these and (most of the time) adheres to them. Example of a user specific rule i've added is this:
+I also have a <File>USER.md</File> file that gets inlined in <File>CLAUDE.md</File> containing personalized info about my language learning and anki preferences. This ranges from the language, accent, and goals I have for vietnamese to the way I like my cards to be setup. heres an example of one of the rules:
 
 ```
 - When constructing example sentences, prefer using vocabulary from existing cards in the deck rather than introducing new unknown words
@@ -32,10 +32,14 @@ We also have <File>USER.md</File> where I have added the personalized info about
 
 ## Anki connect & an anki-connect skill
 
-The crux of this was the agent needs some way to interact with anki to manage cards and decks. Thankfully <a href="https://ankiweb.net/shared/info/2055492159">Anki Connect</a> is a plugin that allows applications to interact with anki using a simple HTTP API. Pairing this with an `anki-connect` skill that contains the full api reference + common workflows allows the agent to wield this API and use anki better than I ever could.
+The crux of this setup is the agent needs some way to interact with anki to manage cards and decks. Thankfully <a href="https://ankiweb.net/shared/info/2055492159">Anki Connect</a> is a plugin that allows applications to interact with anki using a simple HTTP API. Pairing this with an `anki-connect` skill that contains the full api reference + common workflows allows the agent to wield this API and use anki better than I ever could.
 
 ## Elevenlabs MCP
 
-My language learning cards would be useless without audio for the terms and example sentences so I added the elevenlabs MCP to allow the agent to generate all of them for me. I found a voice and stability/speed settings I liked for vietnamese and added that to the <File>USER.md</File> so it knows what to use when creating cards.
+My language learning cards would be useless without audio for them so I added the Elevenlabs MCP to allow the agent to generate all of them for me. I found a voice + stability/speed settings I liked for Vietnamese and added that to the <File>USER.md</File> so it knows what to use when creating cards. I pay $5 a month for Elevenlabs and haven't run into any limiting issues so far.
 
-I've been using this for a few months now and absolutley love it for my learning. I've spent a lot of my language learning journey researching how to learn and setting up the tools to learn rather than being able to spend the time focusing on the material which is why this has been such a big unlock for language learning. The future of language learning (and learning in general) is being able to have the right materials and the tools personalized to you and agents are the perfect medium for that.
+##
+
+I've been using this setup for a few months now and its absolutley changed my language learning. The future of language learning (and learning in general) is being able to have the right materials and the tools personalized to you and agents are the perfect medium for that.
+
+If you would like to try this out checkout <a href="https://github.com/btorndorff/anki-claude-vn">my vietnamese repo</a>. Just ask the agent to adapt it to your needs.
