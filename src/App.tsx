@@ -25,6 +25,15 @@ import { cn } from "./lib/utils";
 // (isDesktopPhotosPage), so a Suspense gap would briefly collapse the card.
 const HalftoneBackground = lazy(() => import("@/components/HalftoneBackground"));
 
+// The paper card drops in from the full viewport height on every navigation —
+// the card swaps its content as it lands, so a fresh sheet appears to fall into
+// place. Stiff + well-damped: a quick fall with a tight, near-wobble-free
+// landing that stays in sync with the paperClick sound.
+const PAPER_DROP = {
+  from: "100vh",
+  transition: { type: "spring", stiffness: 420, damping: 32 },
+} as const;
+
 function AppContent() {
   const location = useLocation();
   const isDesktopPhotosRoute = isDesktopPhotosPage();
@@ -39,16 +48,15 @@ function AppContent() {
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
-          initial={{ y: "100vh" }}
+          initial={{ y: PAPER_DROP.from }}
           animate={{ y: 0 }}
-          exit={isDesktopPhotosRoute ? {} : { y: "100vh" }}
-          transition={{
-            type: "spring",
-            stiffness: 300,
-            damping: 25,
-          }}
+          exit={isDesktopPhotosRoute ? {} : { y: PAPER_DROP.from }}
+          transition={PAPER_DROP.transition}
           onAnimationStart={(definition) => {
-            if (typeof definition === "object" && definition.y === "100vh") {
+            if (
+              typeof definition === "object" &&
+              definition.y === PAPER_DROP.from
+            ) {
               playPaperSlip();
             }
           }}

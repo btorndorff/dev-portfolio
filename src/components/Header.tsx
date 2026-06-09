@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
 import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/", label: "ABOUT" },
@@ -43,7 +44,12 @@ export default function Header() {
 
   if (isContentDetail || isDesktopPhotosRoute) {
     return (
-      <div className="flex items-center w-full justify-between">
+      <div
+        className={cn(
+          "flex items-center w-full justify-between",
+          isDesktopPhotosRoute && "pb-3",
+        )}
+      >
         <button
           onClick={() =>
             window.history.length > 1 ? navigate(-1) : navigate("/")
