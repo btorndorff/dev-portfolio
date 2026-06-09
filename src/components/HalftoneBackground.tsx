@@ -10,7 +10,7 @@ export default function HalftoneBackground() {
       radius={1.2}
       size={0.32}
       scale={1}
-      image="https://workers.paper.design/file-assets/01KG97JP6TNZCG55EKH9NAVX8H/01KG987SRK1GB0037X01GXQ3NK.jpg"
+      image="/images/halftone-source.avif"
       grainSize={0.5}
       type="gooey"
       fit="cover"

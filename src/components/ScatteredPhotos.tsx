@@ -9,6 +9,10 @@ import {
   getStackCenter,
   type ScatterPosition,
 } from "@/lib/scatterPositions";
+import { resizedImage } from "@/lib/image";
+
+// Lightbox fills the viewport; cap at the source's native 1280 but reformat.
+const LIGHTBOX_RENDER_WIDTH = 1280;
 
 interface ScatteredPhotosProps {
   photos: Photo[];
@@ -193,7 +197,7 @@ export default function ScatteredPhotos({
         open={lightboxIndex >= 0}
         close={() => setLightboxIndex(-1)}
         slides={shuffledPhotos.map((photo) => ({
-          src: photo.src,
+          src: resizedImage(photo.src, { width: LIGHTBOX_RENDER_WIDTH }),
           alt: photo.alt,
         }))}
         index={lightboxIndex}

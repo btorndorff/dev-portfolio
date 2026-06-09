@@ -4,6 +4,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import About from "@/pages/About";
 import ContentList from "@/pages/ContentList";
 import ContentPage from "@/pages/ContentPage";
@@ -11,13 +12,18 @@ import { CursorTooltipProvider } from "@/context/CursorTooltipContext";
 import CursorTooltip from "@/components/CursorTooltip";
 import Footer from "@/components/Footer";
 import { AnimatePresence, motion } from "motion/react";
-import HalftoneBackground from "@/components/HalftoneBackground";
 import Paper from "@/components/Paper";
 import Header from "@/components/Header";
 import { playPaperSlip, playPaperClick } from "@/lib/sounds";
-import Photos from "@/pages/Photos";
 import isDesktopPhotosPage from "@/lib/isDesktopPhotosPage";
+import Photos from "@/pages/Photos";
 import { cn } from "./lib/utils";
+
+// Split the shader bundle (@paper-design/shaders-react, WebGL) out of the
+// initial JS — it's the background and doesn't block first paint. Photos is
+// NOT lazy-loaded: the /photos route reshapes the Paper card synchronously
+// (isDesktopPhotosPage), so a Suspense gap would briefly collapse the card.
+const HalftoneBackground = lazy(() => import("@/components/HalftoneBackground"));
 
 function AppContent() {
   const location = useLocation();
@@ -91,7 +97,11 @@ function App() {
     <Router>
       <CursorTooltipProvider>
         <CursorTooltip />
-        <HalftoneBackground />
+        {/* Beige base (set in HalftoneBackground's style) shows until the
+            shader chunk loads, so the page is never blank. */}
+        <Suspense fallback={null}>
+          <HalftoneBackground />
+        </Suspense>
         <AppContent />
       </CursorTooltipProvider>
     </Router>

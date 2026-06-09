@@ -68,7 +68,7 @@ export default function Footer() {
     <footer className="w-full shrink-0">
       <div className="flex justify-between items-center gap-2 w-full">
         <span className="text-sm font-mono text-gray-500">
-          ∴ UPDATED 06/08/26
+          ∴ UPDATED 06/09/26
         </span>
 
         <div className="flex gap-3 text-black">

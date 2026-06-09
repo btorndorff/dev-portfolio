@@ -94,7 +94,9 @@ body {
   margin: 0;
   overflow-x: hidden;
   cursor: var(--cursor-default);
-  background: var(--raw-background);
+  /* Paper-beige base matches HalftoneBackground's backgroundColor so the page
+     is never blank while the (lazy-loaded) shader chunk downloads. */
+  background: #f2f1e8;
 }
 
 a,

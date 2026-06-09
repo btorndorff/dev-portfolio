@@ -41,9 +41,12 @@ const About = () => {
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
         <img
-          src="/images/pfp_lg.jpeg"
+          src="/images/pfp.avif"
           alt="Me"
+          width={128}
+          height={128}
           className="size-32 shrink-0 object-cover"
+          decoding="async"
           onMouseEnter={() => setTooltip("me & ghib")}
           onMouseLeave={() => setTooltip(null)}
         />

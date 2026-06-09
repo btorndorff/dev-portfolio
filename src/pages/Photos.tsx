@@ -9,14 +9,30 @@ import { useCursorTooltip } from "@/context/CursorTooltipContext";
 import { MagnifyingGlassPlusIcon } from "@phosphor-icons/react";
 import { useIsDesktop } from "@/hooks/useMediaQuery";
 import ScatteredPhotos from "@/components/ScatteredPhotos";
+import { resizedImage } from "@/lib/image";
+
+// Mobile grid is 1-2 columns inside the narrow Paper; 720px covers 2x DPR.
+const GRID_RENDER_WIDTH = 720;
+// Lightbox can fill the screen; cap at the source's native 1280 but still
+// reformat to AVIF/WebP via format=auto.
+const LIGHTBOX_RENDER_WIDTH = 1280;
 
 const PhotosMobile = () => {
   const [index, setIndex] = useState(-1);
   const { setTooltip } = useCursorTooltip();
 
   const shuffledPhotos = useMemo(
-    () => [...photos].sort(() => Math.random() - 0.5),
-    [photos],
+    () =>
+      [...photos]
+        .sort(() => Math.random() - 0.5)
+        .map((photo) => ({
+          ...photo,
+          src: resizedImage(photo.src, { width: GRID_RENDER_WIDTH }),
+          // Preserve the original R2 URL so the lightbox can request a
+          // higher-res variant than the grid thumbnail.
+          originalSrc: photo.src,
+        })),
+    [],
   );
 
   return (
@@ -39,6 +55,8 @@ const PhotosMobile = () => {
           spacing={12}
           componentsProps={{
             image: {
+              loading: "lazy",
+              decoding: "async",
               onMouseEnter: () =>
                 setTooltip(<MagnifyingGlassPlusIcon size={16} weight="bold" />),
               onMouseLeave: () => setTooltip(null),
@@ -51,7 +69,9 @@ const PhotosMobile = () => {
         open={index >= 0}
         close={() => setIndex(-1)}
         slides={shuffledPhotos.map((photo) => ({
-          src: photo.src,
+          src: resizedImage(photo.originalSrc, {
+            width: LIGHTBOX_RENDER_WIDTH,
+          }),
           alt: photo.alt,
         }))}
         index={index}

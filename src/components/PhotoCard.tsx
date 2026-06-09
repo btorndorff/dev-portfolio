@@ -3,6 +3,10 @@ import { forwardRef, useCallback, useState } from "react";
 import type { Photo } from "react-photo-album";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
 import { MagnifyingGlassPlusIcon } from "@phosphor-icons/react";
+import { resizedImage } from "@/lib/image";
+
+// Cards render at 280px (see CARD_WIDTH in ScatteredPhotos); 560px covers 2x DPR.
+const CARD_RENDER_WIDTH = 560;
 
 interface PhotoCardProps {
   photo: Photo;
@@ -72,13 +76,14 @@ const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
           }}
         >
           <img
-            src={photo.src}
+            src={resizedImage(photo.src, { width: CARD_RENDER_WIDTH })}
             alt={photo.alt || "Photo"}
             className="block w-full h-auto"
             style={{
               opacity: isLoaded ? 1 : 0,
               transition: "opacity 0.3s ease-in-out",
             }}
+            decoding="async"
             onLoad={() => setIsLoaded(true)}
             draggable={false}
           />
