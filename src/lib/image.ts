@@ -1,7 +1,7 @@
 /**
  * Cloudflare Image Resizing helper.
  *
- * assets.benorndorff.me is an R2 bucket fronted by Cloudflare with Image
+ * assets.benorndorff.xyz is an R2 bucket fronted by Cloudflare with Image
  * Resizing enabled, so we can request resized/reformatted variants on the fly
  * via the /cdn-cgi/image/<options>/<source-path> endpoint. `format=auto` lets
  * Cloudflare negotiate AVIF/WebP per the browser's Accept header, which cuts a
@@ -10,7 +10,7 @@
  * Only assets served from the R2 host can be transformed; anything else is
  * returned unchanged.
  */
-const RESIZE_HOST = "assets.benorndorff.me";
+const RESIZE_HOST = "assets.benorndorff.xyz";
 
 interface ResizeOptions {
   /** Target intrinsic width in CSS pixels. Multiply by DPR at the call site. */

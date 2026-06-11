@@ -19,6 +19,10 @@ const ContentPage = ({ section }: { section: Section }) => {
 
   const { frontmatter, Component } = entry;
 
+  if (frontmatter.layout === "blank") {
+    return <Component />;
+  }
+
   return (
     <MDXProvider components={mdxComponents}>
       <Article

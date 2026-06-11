@@ -4,6 +4,7 @@ export interface ContentFrontmatter {
   description: string;
   date: string;
   previewMedia: string;
+  layout?: "article" | "blank";
   link?: string;
   hidden?: boolean;
   ogImage?: string;
