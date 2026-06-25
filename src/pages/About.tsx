@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
-import {
-  HandPointingIcon,
-  ArrowUpRightIcon,
-  CameraIcon,
-} from "@phosphor-icons/react";
+import { externalTooltip, INTERNAL_TOOLTIP } from "@/lib/tooltips";
 
 const Section = ({
   title,
@@ -15,12 +11,16 @@ const Section = ({
   to: string;
   children: React.ReactNode;
 }) => {
+  const { setTooltip } = useCursorTooltip();
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-base font-mono">
         <Link
           to={to}
           className="group text-black hover:text-gray-500 transition-colors duration-300"
+          onMouseEnter={() => setTooltip(INTERNAL_TOOLTIP)}
+          onMouseLeave={() => setTooltip(null)}
+          onClick={() => setTooltip(null)}
         >
           {/* dashes swap to dots on hover, mirroring the BTO logo's . -> ! */}
           <span className="inline-block group-hover:hidden">-</span>
@@ -46,6 +46,7 @@ const About = () => {
           width={128}
           height={128}
           className="size-32 shrink-0 object-cover"
+          style={{ cursor: "var(--cursor-default)" }}
           decoding="async"
           onMouseEnter={() => setTooltip("me & ghib")}
           onMouseLeave={() => setTooltip(null)}
@@ -69,9 +70,7 @@ const About = () => {
             href="https://www.replo.app/"
             target="_blank"
             className="text-primary hover:underline"
-            onMouseEnter={() =>
-              setTooltip(<ArrowUpRightIcon size={16} weight="bold" />)
-            }
+            onMouseEnter={() => setTooltip(externalTooltip("https://www.replo.app/"))}
             onMouseLeave={() => setTooltip(null)}
           >
             Replo
@@ -82,9 +81,7 @@ const About = () => {
             href="https://www.cambly.com/"
             target="_blank"
             className="text-primary hover:underline"
-            onMouseEnter={() =>
-              setTooltip(<ArrowUpRightIcon size={16} weight="bold" />)
-            }
+            onMouseEnter={() => setTooltip(externalTooltip("https://www.cambly.com/"))}
             onMouseLeave={() => setTooltip(null)}
           >
             Cambly
@@ -99,9 +96,7 @@ const About = () => {
           <Link
             to="/play/noi"
             className="text-primary hover:underline"
-            onMouseEnter={() =>
-              setTooltip(<HandPointingIcon size={16} weight="bold" />)
-            }
+            onMouseEnter={() => setTooltip(INTERNAL_TOOLTIP)}
             onMouseLeave={() => setTooltip(null)}
             onClick={() => setTooltip(null)}
           >
@@ -112,9 +107,7 @@ const About = () => {
           <Link
             to="/photos"
             className="text-primary hover:underline"
-            onMouseEnter={() =>
-              setTooltip(<CameraIcon size={16} weight="bold" />)
-            }
+            onMouseEnter={() => setTooltip(INTERNAL_TOOLTIP)}
             onMouseLeave={() => setTooltip(null)}
             onClick={() => setTooltip(null)}
           >

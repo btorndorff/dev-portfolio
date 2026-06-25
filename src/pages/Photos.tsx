@@ -2,20 +2,16 @@ import { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { MasonryPhotoAlbum } from "react-photo-album";
 import "react-photo-album/masonry.css";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 import photos from "@/data/photos";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
-import { MagnifyingGlassPlusIcon } from "@phosphor-icons/react";
+import { PHOTO_TOOLTIP } from "@/lib/tooltips";
 import { useIsDesktop } from "@/hooks/useMediaQuery";
 import ScatteredPhotos from "@/components/ScatteredPhotos";
+import PhotoModal from "@/components/PhotoModal";
 import { resizedImage } from "@/lib/image";
 
 // Mobile grid is 1-2 columns inside the narrow Paper; 720px covers 2x DPR.
 const GRID_RENDER_WIDTH = 720;
-// Lightbox can fill the screen; cap at the source's native 1280 but still
-// reformat to AVIF/WebP via format=auto.
-const LIGHTBOX_RENDER_WIDTH = 1280;
 
 const PhotosMobile = () => {
   const [index, setIndex] = useState(-1);
@@ -57,27 +53,17 @@ const PhotosMobile = () => {
             image: {
               loading: "lazy",
               decoding: "async",
-              onMouseEnter: () =>
-                setTooltip(<MagnifyingGlassPlusIcon size={16} weight="bold" />),
+              onMouseEnter: () => setTooltip(PHOTO_TOOLTIP),
               onMouseLeave: () => setTooltip(null),
             },
           }}
         />
       </div>
 
-      <Lightbox
-        open={index >= 0}
-        close={() => setIndex(-1)}
-        slides={shuffledPhotos.map((photo) => ({
-          src: resizedImage(photo.originalSrc, {
-            width: LIGHTBOX_RENDER_WIDTH,
-          }),
-          alt: photo.alt,
-        }))}
-        index={index}
-        styles={{
-          container: { backgroundColor: "rgba(0, 0, 0, .9)" },
-        }}
+      <PhotoModal
+        src={shuffledPhotos[index]?.originalSrc ?? null}
+        alt={shuffledPhotos[index]?.alt}
+        onClose={() => setIndex(-1)}
       />
     </div>
   );

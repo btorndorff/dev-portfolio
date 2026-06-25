@@ -1,39 +1,23 @@
 import type { MDXComponents } from "mdx/types";
 import { NoiLogo } from "@/components/NoiLogo";
+import { useCursorTooltip } from "@/context/CursorTooltipContext";
+import { externalTooltip } from "@/lib/tooltips";
 
 interface VideoProps {
   src: string;
-  href?: string;
   className?: string;
 }
 
-export const Video = ({ src, href, className }: VideoProps) => {
-  const video = (
-    <video
-      src={src}
-      autoPlay
-      loop
-      muted
-      className={className ?? "w-full h-auto"}
-      playsInline
-    />
-  );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block"
-      >
-        {video}
-      </a>
-    );
-  }
-
-  return video;
-};
+export const Video = ({ src, className }: VideoProps) => (
+  <video
+    src={src}
+    autoPlay
+    loop
+    muted
+    className={className ?? "w-full h-auto"}
+    playsInline
+  />
+);
 
 interface LoomVideoProps {
   src: string;
@@ -60,18 +44,33 @@ export const File = ({ children }: { children: React.ReactNode }) => (
   </code>
 );
 
-// MDX component overrides - minimal, let typography plugin handle most
-export const mdxComponents: MDXComponents = {
-  a: ({ href, children }) => (
+// Prose links are external (open in a new tab); show the standard external
+// tooltip (link icon + URL) like every other off-site link on the site.
+const ProseLink = ({
+  href,
+  children,
+}: {
+  href?: string;
+  children?: React.ReactNode;
+}) => {
+  const { setTooltip } = useCursorTooltip();
+  return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="text-primary hover:underline"
+      onMouseEnter={() => href && setTooltip(externalTooltip(href))}
+      onMouseLeave={() => setTooltip(null)}
     >
       {children}
     </a>
-  ),
+  );
+};
+
+// MDX component overrides - minimal, let typography plugin handle most
+export const mdxComponents: MDXComponents = {
+  a: ProseLink,
 };
 
 // Custom components available in MDX files

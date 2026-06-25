@@ -1,6 +1,6 @@
-import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
+import { INTERNAL_TOOLTIP } from "@/lib/tooltips";
 import { getEntries, isVideo, type Section } from "@/lib/content";
 
 interface ContentCardProps {
@@ -24,9 +24,7 @@ const ContentCard = ({
     <Link
       to={link}
       className="block w-full flex flex-col gap-1 hover:opacity-50 transition-opacity duration-300"
-      onMouseEnter={() =>
-        setTooltip(<ArrowRightIcon size={16} weight="bold" />)
-      }
+      onMouseEnter={() => setTooltip(INTERNAL_TOOLTIP)}
       onMouseLeave={() => setTooltip(null)}
       onClick={() => setTooltip(null)}
     >

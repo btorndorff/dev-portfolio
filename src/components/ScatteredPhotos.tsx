@@ -1,18 +1,13 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import type { Photo } from "react-photo-album";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 import PhotoCard from "@/components/PhotoCard";
+import PhotoModal from "@/components/PhotoModal";
 import {
   generateScatterPositions,
   getStackCenter,
   type ScatterPosition,
 } from "@/lib/scatterPositions";
-import { resizedImage } from "@/lib/image";
-
-// Lightbox fills the viewport; cap at the source's native 1280 but reformat.
-const LIGHTBOX_RENDER_WIDTH = 1280;
 
 interface ScatteredPhotosProps {
   photos: Photo[];
@@ -193,17 +188,10 @@ export default function ScatteredPhotos({
         </AnimatePresence>
       </div>
 
-      <Lightbox
-        open={lightboxIndex >= 0}
-        close={() => setLightboxIndex(-1)}
-        slides={shuffledPhotos.map((photo) => ({
-          src: resizedImage(photo.src, { width: LIGHTBOX_RENDER_WIDTH }),
-          alt: photo.alt,
-        }))}
-        index={lightboxIndex}
-        styles={{
-          container: { backgroundColor: "rgba(0, 0, 0, .9)" },
-        }}
+      <PhotoModal
+        src={shuffledPhotos[lightboxIndex]?.src ?? null}
+        alt={shuffledPhotos[lightboxIndex]?.alt}
+        onClose={() => setLightboxIndex(-1)}
       />
     </>
   );

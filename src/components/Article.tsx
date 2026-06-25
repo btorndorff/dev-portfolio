@@ -1,5 +1,6 @@
 import { LinkIcon } from '@phosphor-icons/react';
 import { useCursorTooltip } from '@/context/CursorTooltipContext';
+import { externalTooltip } from '@/lib/tooltips';
 
 interface ArticleProps {
   title: string;
@@ -28,7 +29,7 @@ export function Article({ title, date, link, children }: ArticleProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors duration-300"
-              onMouseEnter={() => setTooltip(link)}
+              onMouseEnter={() => setTooltip(externalTooltip(link))}
               onMouseLeave={() => setTooltip(null)}
             >
               <LinkIcon size={20} weight="bold" />

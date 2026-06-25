@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { forwardRef, useCallback, useState } from "react";
 import type { Photo } from "react-photo-album";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
-import { MagnifyingGlassPlusIcon } from "@phosphor-icons/react";
+import { PHOTO_TOOLTIP } from "@/lib/tooltips";
 import { resizedImage } from "@/lib/image";
 
 // Cards render at 280px (see CARD_WIDTH in ScatteredPhotos); 560px covers 2x DPR.
@@ -36,12 +36,7 @@ const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
     const { setTooltip } = useCursorTooltip();
 
     const handleMouseEnter = useCallback(() => {
-      setTooltip(
-        <div className="flex items-center gap-1">
-          <MagnifyingGlassPlusIcon size={16} weight="bold" />
-          <span className="text-xs font-bold">x2</span>
-        </div>,
-      );
+      setTooltip(PHOTO_TOOLTIP);
     }, [setTooltip]);
 
     const handleMouseLeave = useCallback(() => {
@@ -54,7 +49,9 @@ const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
         className="absolute will-change-transform"
         style={{
           ...style,
-          cursor: isDragging ? "grabbing" : "grab",
+          cursor: isDragging
+            ? "var(--cursor-grabbing)"
+            : "var(--cursor-grab)",
         }}
         drag
         dragElastic={0.1}
@@ -82,6 +79,7 @@ const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
             style={{
               opacity: isLoaded ? 1 : 0,
               transition: "opacity 0.3s ease-in-out",
+              cursor: "inherit",
             }}
             decoding="async"
             onLoad={() => setIsLoaded(true)}

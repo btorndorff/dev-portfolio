@@ -15,6 +15,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-rc.0",
     "@mdx-js/react": "^3.1.1",
     "@mdx-js/rollup": "^3.1.1",
     "@paper-design/shaders-react": "^0.0.71",
@@ -28,8 +29,7 @@
     "react-dom": "^18.3.1",
     "react-photo-album": "^3.0.2",
     "react-router-dom": "^7.0.1",
-    "tailwind-merge": "^3.4.0",
-    "yet-another-react-lightbox": "^3.21.7"
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
