@@ -3,8 +3,6 @@ import { createPortal } from "react-dom";
 import { MasonryPhotoAlbum } from "react-photo-album";
 import "react-photo-album/masonry.css";
 import photos from "@/data/photos";
-import { useCursorTooltip } from "@/context/CursorTooltipContext";
-import { PHOTO_TOOLTIP } from "@/lib/tooltips";
 import { useIsDesktop } from "@/hooks/useMediaQuery";
 import ScatteredPhotos from "@/components/ScatteredPhotos";
 import PhotoModal from "@/components/PhotoModal";
@@ -15,7 +13,6 @@ const GRID_RENDER_WIDTH = 720;
 
 const PhotosMobile = () => {
   const [index, setIndex] = useState(-1);
-  const { setTooltip } = useCursorTooltip();
 
   const shuffledPhotos = useMemo(
     () =>
@@ -53,8 +50,6 @@ const PhotosMobile = () => {
             image: {
               loading: "lazy",
               decoding: "async",
-              onMouseEnter: () => setTooltip(PHOTO_TOOLTIP),
-              onMouseLeave: () => setTooltip(null),
             },
           }}
         />

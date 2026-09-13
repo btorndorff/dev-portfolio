@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCursorTooltip } from "@/context/CursorTooltipContext";
 import { INTERNAL_TOOLTIP } from "@/lib/tooltips";
@@ -17,8 +18,10 @@ const ContentCard = ({
   description,
 }: ContentCardProps) => {
   const { setTooltip } = useCursorTooltip();
+  const [mediaLoaded, setMediaLoaded] = useState(false);
 
-  const mediaClassName = "w-full h-full object-cover";
+  const mediaClassName =
+    "absolute inset-0 size-full object-cover transition-opacity duration-300";
 
   return (
     <Link
@@ -28,18 +31,33 @@ const ContentCard = ({
       onMouseLeave={() => setTooltip(null)}
       onClick={() => setTooltip(null)}
     >
-      {isVideo(previewMedia) ? (
-        <video
-          src={previewMedia}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className={mediaClassName}
+      <div className="relative aspect-video w-full overflow-hidden bg-gray-200">
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 animate-pulse bg-gray-200 transition-opacity duration-300 ${
+            mediaLoaded ? "opacity-0" : "opacity-100"
+          }`}
         />
-      ) : (
-        <img src={previewMedia} alt={title} className={mediaClassName} />
-      )}
+        {isVideo(previewMedia) ? (
+          <video
+            src={previewMedia}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className={`${mediaClassName} ${mediaLoaded ? "opacity-100" : "opacity-0"}`}
+            onLoadedData={() => setMediaLoaded(true)}
+          />
+        ) : (
+          <img
+            src={previewMedia}
+            alt={title}
+            className={`${mediaClassName} ${mediaLoaded ? "opacity-100" : "opacity-0"}`}
+            onLoad={() => setMediaLoaded(true)}
+          />
+        )}
+      </div>
       <div className="flex flex-col gap-0.5">
         <h2 className="text-sm">{title}</h2>
         {description && <p className="text-xs text-gray-600">{description}</p>}

@@ -1,7 +1,6 @@
 import {
   HandPointingIcon,
   LinkIcon,
-  MagnifyingGlassPlusIcon,
 } from "@phosphor-icons/react";
 
 // Shared cursor-tooltip content so the same intent renders identically
@@ -21,13 +20,5 @@ export const externalTooltip = (href: string) => (
   <span className="flex items-center gap-1.5">
     <LinkIcon size={16} weight="bold" />
     <span>{displayUrl(href)}</span>
-  </span>
-);
-
-// Photo cards / grid: double-click (desktop) or tap (mobile) to open lightbox.
-export const PHOTO_TOOLTIP = (
-  <span className="flex items-center gap-1">
-    <MagnifyingGlassPlusIcon size={16} weight="bold" />
-    <span className="text-xs font-bold">double-click</span>
   </span>
 );

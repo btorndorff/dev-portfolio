@@ -1,6 +1,11 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import type { Photo } from "react-photo-album";
+import {
+  HandGrabbingIcon,
+  HandPalmIcon,
+  MagnifyingGlassPlusIcon,
+} from "@phosphor-icons/react";
 import PhotoCard from "@/components/PhotoCard";
 import PhotoModal from "@/components/PhotoModal";
 import {
@@ -16,6 +21,52 @@ interface ScatteredPhotosProps {
 
 const CARD_WIDTH = 280;
 const CARD_HEIGHT = 320;
+const INSTRUCTIONS_POSITION = { x: 24, y: 24, rotation: -2 };
+
+const GrabIcon = () => {
+  const [isClosed, setIsClosed] = useState(false);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    let step = 0;
+    const burst = [
+      { closed: true, duration: 220 },
+      { closed: false, duration: 340 },
+      { closed: true, duration: 220 },
+      { closed: false, duration: 4800 },
+    ];
+
+    const advance = () => {
+      const frame = burst[step];
+      setIsClosed(frame.closed);
+      step = (step + 1) % burst.length;
+      timeout = setTimeout(advance, frame.duration);
+    };
+
+    // Let the card settle before its first two-grab burst.
+    timeout = setTimeout(advance, 900);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return (
+    <AnimatePresence mode="popLayout" initial={false}>
+      <motion.span
+        key={isClosed ? "closed" : "open"}
+        className="flex"
+        initial={{ opacity: 0, scale: 0.75 }}
+        animate={{ opacity: 1, scale: isClosed ? 0.88 : 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.12, ease: "easeOut" }}
+      >
+        {isClosed ? (
+          <HandGrabbingIcon size={16} weight="bold" />
+        ) : (
+          <HandPalmIcon size={16} weight="bold" />
+        )}
+      </motion.span>
+    </AnimatePresence>
+  );
+};
 
 export default function ScatteredPhotos({
   photos,
@@ -125,6 +176,51 @@ export default function ScatteredPhotos({
     <>
       <div className="fixed inset-0 overflow-hidden z-[5]">
         <AnimatePresence>
+          <motion.div
+            initial={{
+              x: stackCenter.x,
+              y: stackCenter.y,
+              rotate: 0,
+              opacity: 0,
+            }}
+            animate={
+              isExiting
+                ? {
+                    x: stackCenter.x,
+                    y: stackCenter.y,
+                    rotate: 0,
+                    opacity: 0,
+                  }
+                : {
+                    x: INSTRUCTIONS_POSITION.x,
+                    y: INSTRUCTIONS_POSITION.y,
+                    rotate: INSTRUCTIONS_POSITION.rotation,
+                    opacity: 1,
+                  }
+            }
+            exit={{
+              x: stackCenter.x,
+              y: stackCenter.y,
+              rotate: 0,
+              opacity: 0,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 20,
+            }}
+            className="absolute z-[100] flex items-center gap-4 bg-white paper-texture px-4 py-3 text-black shadow-lg"
+          >
+            <span className="flex items-center gap-1 text-sm">
+              <GrabIcon />
+              drag them
+            </span>
+            <span className="flex items-center gap-1 text-sm">
+              <MagnifyingGlassPlusIcon size={16} weight="bold" />
+              double-click
+            </span>
+          </motion.div>
+
           {shuffledPhotos.map((photo, index) => {
             const position = scatterPositions[index];
             if (!position) return null;

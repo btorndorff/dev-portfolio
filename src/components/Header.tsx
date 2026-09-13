@@ -16,7 +16,7 @@ const Nav = () => {
     <div className="flex gap-0.5 md:gap-2">
       {navItems.map((item, i) => (
         <span key={item.to} className="flex gap-2">
-          {i > 0 && <span className="text-gray-400">·</span>}
+          {i > 0 && <span className="text-gray-400">/</span>}
           <NavLink
             to={item.to}
             className={({ isActive }) =>
@@ -59,7 +59,7 @@ export default function Header() {
           <ArrowLeftIcon size={20} weight="bold" />
         </button>
         {isDesktopPhotosRoute && (
-          <span className="text-black text-sm">shot on film</span>
+          <span className="text-sm text-black">shot on film</span>
         )}
       </div>
     );

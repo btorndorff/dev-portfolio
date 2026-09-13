@@ -1,8 +1,6 @@
 import { motion } from "motion/react";
-import { forwardRef, useCallback, useState } from "react";
+import { forwardRef, useState } from "react";
 import type { Photo } from "react-photo-album";
-import { useCursorTooltip } from "@/context/CursorTooltipContext";
-import { PHOTO_TOOLTIP } from "@/lib/tooltips";
 import { resizedImage } from "@/lib/image";
 
 // Cards render at 280px (see CARD_WIDTH in ScatteredPhotos); 560px covers 2x DPR.
@@ -33,15 +31,6 @@ const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
     ref,
   ) => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const { setTooltip } = useCursorTooltip();
-
-    const handleMouseEnter = useCallback(() => {
-      setTooltip(PHOTO_TOOLTIP);
-    }, [setTooltip]);
-
-    const handleMouseLeave = useCallback(() => {
-      setTooltip(null);
-    }, [setTooltip]);
 
     return (
       <motion.div
@@ -61,8 +50,6 @@ const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
         whileDrag={{ scale: 1.05 }}
         onClick={onClick}
         onDoubleClick={onDoubleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
       >
         <div
           className="relative overflow-hidden"

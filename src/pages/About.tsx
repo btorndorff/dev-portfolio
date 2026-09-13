@@ -64,8 +64,21 @@ const About = () => {
 
       <Section title="WORK" to="/work">
         <p>
-          Full stack engineer in SF passionate about crafting beautiful user
+          Product Engineer in SF passionate about crafting beautiful user
           experiences. Currently at{" "}
+          <a
+            href="https://plasmidsaurus.com/"
+            target="_blank"
+            className="text-primary hover:underline"
+            onMouseEnter={() =>
+              setTooltip(externalTooltip("https://plasmidsaurus.com/"))
+            }
+            onMouseLeave={() => setTooltip(null)}
+          >
+            Plasmidsaurus
+          </a>
+          , building tools to help scientist analyze their sequencing results.
+          Before that, I was at{" "}
           <a
             href="https://www.replo.app/"
             target="_blank"
@@ -74,9 +87,8 @@ const About = () => {
             onMouseLeave={() => setTooltip(null)}
           >
             Replo
-          </a>
-          , building an agent to help you sell anything online. Before that, I
-          was at{" "}
+          </a>{" "}
+          and{" "}
           <a
             href="https://www.cambly.com/"
             target="_blank"
@@ -85,8 +97,7 @@ const About = () => {
             onMouseLeave={() => setTooltip(null)}
           >
             Cambly
-          </a>{" "}
-          helping people learn English.
+          </a>.
         </p>
       </Section>
 

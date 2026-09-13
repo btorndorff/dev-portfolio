@@ -33,12 +33,10 @@ export default function PhotoModal({ src, alt, onClose }: PhotoModalProps) {
       }}
     >
       <Dialog.Portal>
-        {/* Blurred scrim that fades in/out. A paper-toned tint over the blur
-            mutes the scattered cards behind into an even wash instead of
-            recognizable smears around odd-shaped photos. data-* styles are set
-            by Base UI during the enter/exit transitions. */}
+        {/* Paper-toned scrim that fades in/out. data-* styles are set by Base UI
+            during the enter/exit transitions. */}
         <Dialog.Backdrop
-          className="fixed inset-0 z-[100] bg-[#f2f1e8]/50 backdrop-blur-md transition-opacity duration-300 ease-out data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
+          className="fixed inset-0 z-[100] bg-[#f2f1e8]/50 transition-opacity duration-300 ease-out data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
         />
         <Dialog.Popup
           className="fixed inset-0 z-[101] flex items-center justify-center p-6 outline-none transition-all duration-300 ease-out data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95"
