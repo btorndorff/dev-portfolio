@@ -1,6 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Arci Mono";
+  src: url("/fonts/arci-mono/regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Arci Mono";
+  src: url("/fonts/arci-mono/medium.woff2") format("woff2");
+  font-weight: 500 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Base UI sets data-starting-style / data-ending-style on dialog elements
    during enter/exit so CSS transitions can run. Register them as Tailwind
@@ -104,6 +119,7 @@
 }
 
 @theme {
+  --font-mono: "Arci Mono", monospace;
   --color-primary: var(--raw-primary);
   --color-secondary: var(--raw-secondary);
   --color-background: var(--raw-background);
@@ -117,7 +133,7 @@
 
 body {
   @apply antialiased;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
