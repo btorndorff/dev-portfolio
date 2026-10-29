@@ -32,8 +32,14 @@ function escapeHtml(s) {
     .replace(/>/g, "&gt;");
 }
 
-function buildMetaTags({ title, description, image, url, type }) {
+function videoMimeType(url) {
+  const extension = new URL(url, SITE_URL).pathname.split(".").pop().toLowerCase();
+  return { mp4: "video/mp4", mov: "video/quicktime", webm: "video/webm" }[extension];
+}
+
+function buildMetaTags({ title, description, image, url, type, video, videoWidth, videoHeight }) {
   const absImage = image.startsWith("http") ? image : `${SITE_URL}${image}`;
+  const absVideo = video ? new URL(video, SITE_URL).href : null;
   return [
     `<meta name="description" content="${escapeHtml(description)}" />`,
     `<meta property="og:title" content="${escapeHtml(title)}" />`,
@@ -41,6 +47,15 @@ function buildMetaTags({ title, description, image, url, type }) {
     `<meta property="og:image" content="${escapeHtml(absImage)}" />`,
     `<meta property="og:url" content="${escapeHtml(url)}" />`,
     `<meta property="og:type" content="${type}" />`,
+    ...(video ? [
+      `<meta property="og:video" content="${escapeHtml(absVideo)}" />`,
+      ...(absVideo.startsWith("https:") ? [`<meta property="og:video:secure_url" content="${escapeHtml(absVideo)}" />`] : []),
+      `<meta property="og:video:type" content="${videoMimeType(video)}" />`,
+      ...(videoWidth && videoHeight ? [
+        `<meta property="og:video:width" content="${videoWidth}" />`,
+        `<meta property="og:video:height" content="${videoHeight}" />`,
+      ] : []),
+    ] : []),
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escapeHtml(title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
@@ -78,6 +93,7 @@ for (const section of SECTIONS) {
 
     const slug = fm.slug;
     const image = fm.ogImage || DEFAULT_OG;
+    const video = fm.previewMedia && videoMimeType(fm.previewMedia) ? fm.previewMedia : undefined;
     const url = `${SITE_URL}/${section}/${slug}`;
     const pageTitle = `${fm.title} — ${SITE_TITLE}`;
     const metaTags = buildMetaTags({
@@ -86,6 +102,7 @@ for (const section of SECTIONS) {
       image,
       url,
       type: "article",
+      video,
     });
     const html = injectHead(shell, { title: pageTitle, metaTags });
     const outDir = join(distDir, section, slug);
@@ -102,7 +119,25 @@ const rootMeta = buildMetaTags({
   image: DEFAULT_OG,
   url: `${SITE_URL}/`,
   type: "website",
+  video: "/og/video.mp4",
+  videoWidth: 1920,
+  videoHeight: 1080,
 });
 writeFileSync(distIndex, injectHead(shell, { title: SITE_TITLE, metaTags: rootMeta }), "utf8");
 console.log(`[prerender] root index.html patched`);
+
+for (const section of ["work", "play", "photos"]) {
+  const title = `${section[0].toUpperCase()}${section.slice(1)} — ${SITE_TITLE}`;
+  const metaTags = buildMetaTags({
+    title,
+    description: SITE_DESCRIPTION,
+    image: DEFAULT_OG,
+    url: `${SITE_URL}/${section}`,
+    type: "website",
+  });
+  const outDir = join(distDir, section);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, "index.html"), injectHead(shell, { title, metaTags }), "utf8");
+  console.log(`[prerender] ${section} -> ${DEFAULT_OG}`);
+}
 console.log(`[prerender] done (${total} post${total === 1 ? "" : "s"})`);
