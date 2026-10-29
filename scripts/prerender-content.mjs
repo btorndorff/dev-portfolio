@@ -10,7 +10,7 @@ const distIndex = join(distDir, "index.html");
 
 const SECTIONS = ["work", "play"];
 
-const SITE_URL = (process.env.SITE_URL || "https://benorndorff.me").replace(/\/$/, "");
+const SITE_URL = (process.env.SITE_URL || "https://benorndorff.xyz").replace(/\/$/, "");
 const DEFAULT_OG = "/og/default.png";
 const SITE_TITLE = "Ben Orndorff";
 const SITE_DESCRIPTION = "Ben Orndorff — work, play, photos.";
@@ -92,8 +92,8 @@ for (const section of SECTIONS) {
     if (fm.hidden) continue;
 
     const slug = fm.slug;
-    const image = fm.ogImage || DEFAULT_OG;
     const video = fm.previewMedia && videoMimeType(fm.previewMedia) ? fm.previewMedia : undefined;
+    const image = fm.ogImage || (video ? DEFAULT_OG : fm.previewMedia) || DEFAULT_OG;
     const url = `${SITE_URL}/${section}/${slug}`;
     const pageTitle = `${fm.title} — ${SITE_TITLE}`;
     const metaTags = buildMetaTags({
@@ -119,9 +119,6 @@ const rootMeta = buildMetaTags({
   image: DEFAULT_OG,
   url: `${SITE_URL}/`,
   type: "website",
-  video: "/og/video.mp4",
-  videoWidth: 1920,
-  videoHeight: 1080,
 });
 writeFileSync(distIndex, injectHead(shell, { title: SITE_TITLE, metaTags: rootMeta }), "utf8");
 console.log(`[prerender] root index.html patched`);
@@ -131,13 +128,16 @@ for (const section of ["work", "play", "photos"]) {
   const metaTags = buildMetaTags({
     title,
     description: SITE_DESCRIPTION,
-    image: DEFAULT_OG,
+    image: `/og/${section}.png`,
     url: `${SITE_URL}/${section}`,
     type: "website",
+    video: section === "photos" ? "/og/video.mp4" : `/og/${section}.mp4`,
+    videoWidth: section === "photos" ? 1920 : 1200,
+    videoHeight: section === "photos" ? 1080 : 800,
   });
   const outDir = join(distDir, section);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, "index.html"), injectHead(shell, { title, metaTags }), "utf8");
-  console.log(`[prerender] ${section} -> ${DEFAULT_OG}`);
+  console.log(`[prerender] ${section} metadata generated`);
 }
 console.log(`[prerender] done (${total} post${total === 1 ? "" : "s"})`);
