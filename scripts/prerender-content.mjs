@@ -92,8 +92,7 @@ for (const section of SECTIONS) {
     if (fm.hidden) continue;
 
     const slug = fm.slug;
-    const video = fm.previewMedia && videoMimeType(fm.previewMedia) ? fm.previewMedia : undefined;
-    const image = fm.ogImage || (video ? DEFAULT_OG : fm.previewMedia) || DEFAULT_OG;
+    const image = DEFAULT_OG;
     const url = `${SITE_URL}/${section}/${slug}`;
     const pageTitle = `${fm.title} — ${SITE_TITLE}`;
     const metaTags = buildMetaTags({
@@ -102,7 +101,6 @@ for (const section of SECTIONS) {
       image,
       url,
       type: "article",
-      video,
     });
     const html = injectHead(shell, { title: pageTitle, metaTags });
     const outDir = join(distDir, section, slug);
